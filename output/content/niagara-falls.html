@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niagara Falls: An Interactive Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Misty Blue and Stone -->
+    <!-- Application Structure Plan: A thematic, non-linear SPA. The structure uses a top navigation bar to switch between four core themes: 'The Power of Nature' (geology/formation), 'The Human Story' (history/culture/daredevils), 'Taming the Giant' (hydroelectric power), and 'Experience the Falls' (tourism). This is more user-friendly than the report's linear chapters, allowing users to jump to topics of interest. Interactions include a timeline for geological retreat, filterable daredevil profiles, dynamic charts for power/flow comparison, and a side-by-side interactive guide to US/Canadian attractions. This design prioritizes exploration and understanding over passive reading. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Geological formation/retreat -> Goal: Show change over time -> Viz: Interactive Timeline (HTML/CSS/JS) -> Interaction: Clicking dates reveals info -> Justification: More engaging than static text.
+        - Report Info: Daredevil data -> Goal: Organize and compare individuals -> Viz: Filterable Card Gallery (HTML/CSS/JS) -> Interaction: Filter by 'Survived'/'Fatal' -> Justification: Allows users to easily sort and analyze the data.
+        - Report Info: Waterfall comparison data -> Goal: Compare scale and power -> Viz: Dynamic Bar Chart (Chart.js) -> Interaction: Tooltips on hover -> Justification: Visually represents quantitative comparisons effectively.
+        - Report Info: Hydroelectric water diversion -> Goal: Show human impact -> Viz: Toggleable Bar Chart (Chart.js/JS) -> Interaction: Buttons to switch between 'Natural Flow' and 'Tourist Flow' -> Justification: Clearly demonstrates the treaty's impact.
+        - Report Info: US vs. Canada tourism -> Goal: Compare experiences -> Viz: Interactive two-column layout (HTML/CSS/JS) -> Interaction: Hovering over attractions reveals details -> Justification: Provides a direct, easy-to-digest comparison.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; /* Light Greyish Blue */
+            color: #2D3748; /* Dark Slate Gray */
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            color: #4A5568; /* Medium Slate Gray */
+        }
+        .nav-button.active, .nav-button:hover {
+            color: #2B6CB0; /* Dark Blue */
+            border-bottom-color: #2B6CB0;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #E2E8F0; /* Light Gray */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid #A0AEC0; /* Gray */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            border: 2px solid #A0AEC0;
+            transition: background-color 0.3s ease;
+        }
+        .timeline-item:hover::before {
+            background-color: #2B6CB0;
+        }
+        .daredevil-card {
+            border: 1px solid #E2E8F0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .daredevil-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <h1 class="text-2xl font-bold text-gray-800">Niagara</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <button class="nav-button active py-2 px-3 border-b-2 border-transparent text-sm font-semibold" data-target="nature">The Power of Nature</button>
+                        <button class="nav-button py-2 px-3 border-b-2 border-transparent text-sm font-semibold" data-target="human">The Human Story</button>
+                        <button class="nav-button py-2 px-3 border-b-2 border-transparent text-sm font-semibold" data-target="power">Taming the Giant</button>
+                        <button class="nav-button py-2 px-3 border-b-2 border-transparent text-sm font-semibold" data-target="experience">Experience the Falls</button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <select id="mobile-nav" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                        <option value="nature">The Power of Nature</option>
+                        <option value="human">The Human Story</option>
+                        <option value="power">Taming the Giant</option>
+                        <option value="experience">Experience the Falls</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Section: The Power of Nature -->
+        <section id="nature" class="content-section active">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-2">The Power of Nature</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">Explore the ancient geological forces that created Niagara Falls and the relentless process of erosion that continues to shape this natural wonder. This section delves into the deep history written in the rock and the dynamic systems that define the Falls today.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">A Landscape Carved by Ice</h3>
+                    <p class="text-gray-700 mb-4">The story of Niagara begins hundreds of millions of years ago at the bottom of a tropical sea. Layers of sediment and ancient coral reefs were compressed into the rock formations we see today. The hard, erosion-resistant <span class="font-semibold text-blue-700">Lockport Dolostone</span> forms the caprock, while softer shales lie beneath. This geological sandwich is the key to the Falls' existence.</p>
+                    <p class="text-gray-700">The last Ice Age delivered the final, dramatic touch. As the massive Wisconsin Glacier retreated about 12,000 years ago, it unleashed immense torrents of meltwater, carving out the Great Lakes and the Niagara River. When this new river flowed over the Niagara Escarpment, the Falls were born.</p>
+                </div>
+                 <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">The Engine of Erosion</h3>
+                     <div class="relative w-full h-64 bg-gray-100 rounded-lg p-4">
+                        <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-red-200 flex items-center justify-center text-sm font-semibold text-red-800">Queenston Shale (Soft)</div>
+                        <div class="absolute bottom-1/3 left-0 right-0 h-1/3 bg-gray-300 flex items-center justify-center text-sm font-semibold text-gray-800">Rochester Shale (Soft)</div>
+                        <div class="absolute bottom-2/3 left-0 right-0 h-1/3 bg-blue-300 flex items-center justify-center text-sm font-semibold text-blue-800">Lockport Dolostone (Hard Caprock)</div>
+                        <div class="absolute top-0 left-1/2 w-1/2 h-full text-blue-500 text-3xl font-extrabold flex items-start justify-center pt-2">
+                            <span>🌊</span>
+                        </div>
+                        <p class="absolute top-1/2 left-0 text-xs text-gray-600 -rotate-90 origin-top-left">Water Flow</p>
+                        <p class="absolute bottom-1/4 right-2 text-sm font-semibold text-black animate-pulse">Undercutting</p>
+                    </div>
+                    <p class="text-gray-700 mt-4">The Falls' sheer face is maintained by a process called differential erosion. The powerful river scours the soft shale layers beneath the hard caprock, creating an undercut. Eventually, the unsupported caprock collapses, maintaining the vertical drop and causing the Falls to retreat upstream.</p>
+                </div>
+            </div>
+
+            <div class="card p-6 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">A Relentless Retreat: An 11km Journey</h3>
+                <p class="text-center text-gray-600 mb-6">Born near modern-day Lewiston, the Falls have carved the 11km (7 mile) Niagara Gorge by retreating upstream over 12,000 years. Click on the timeline to see how the rate of this journey has changed.</p>
+                <div class="relative">
+                    <div class="timeline-item pb-8 cursor-pointer" onclick="showTimelineInfo('info1')">
+                        <h4 class="font-bold text-lg">12,000 Years Ago - The Birth</h4>
+                        <p id="info1" class="text-gray-600 hidden">The Falls are formed at the edge of the Niagara Escarpment. The initial retreat is rapid.</p>
+                    </div>
+                    <div class="timeline-item pb-8 cursor-pointer" onclick="showTimelineInfo('info2')">
+                        <h4 class="font-bold text-lg">Pre-1900s - Natural Erosion</h4>
+                        <p id="info2" class="text-gray-600 hidden">For centuries, the natural rate of erosion was estimated at a remarkable 3 to 5 feet per year, constantly reshaping the landscape.</p>
+                    </div>
+                    <div class="timeline-item pb-8 cursor-pointer" onclick="showTimelineInfo('info3')">
+                        <h4 class="font-bold text-lg">20th Century - Human Intervention</h4>
+                        <p id="info3" class="text-gray-600 hidden">The large-scale diversion of water for hydroelectric power dramatically reduced the flow over the crest, slowing erosion to about 1 foot per year.</p>
+                    </div>
+                    <div class="timeline-item cursor-pointer" onclick="showTimelineInfo('info4')">
+                        <h4 class="font-bold text-lg">The Future - 50,000 Years?</h4>
+                        <p id="info4" class="text-gray-600 hidden">If left to its natural course, geologists predict the Falls would erode all the way back to Lake Erie in roughly 50,000 years, draining the lake entirely. Human intervention has significantly extended this timeline.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: The Human Story -->
+        <section id="human" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-2">The Human Story</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">From sacred ground for First Peoples to a stage for daredevils and a backdrop for romance, Niagara Falls has deeply intertwined itself with human history and culture. This section explores our complex relationship with this powerful place.</p>
+            </div>
+            
+            <div class="card p-6 rounded-lg mb-8">
+                <h3 class="text-2xl font-bold mb-4">From Conflict to Conservation</h3>
+                <p class="text-gray-700 mb-4">The first people arrived 13,000 years ago, viewing the Falls as a place of spiritual power. European arrival in the 1600s turned the region into a strategic frontier, culminating in the War of 1812. By the 19th century, unchecked tourism threatened to ruin its beauty. This degradation sparked a pioneering conservation movement. Led by figures like Frederick Law Olmsted, this resulted in the creation of public parks on both sides of the border in 1885 (USA) and 1888 (Canada), a landmark act of international cooperation to preserve a shared natural treasure.</p>
+            </div>
+
+            <div class="card p-6 rounded-lg">
+                <h3 class="text-2xl font-bold mb-4 text-center">Dancing on the Brink: A History of Daredevils</h3>
+                <p class="text-center text-gray-600 mb-6">The Falls' fame has long attracted individuals seeking to conquer it for fame and fortune. Filter the list below to explore their stories.</p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <button id="filter-all" class="px-4 py-2 bg-blue-600 text-white rounded-md font-semibold">All</button>
+                    <button id="filter-survived" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold">Survived</button>
+                    <button id="filter-fatal" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold">Fatal</button>
+                </div>
+                <div id="daredevil-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Taming the Giant -->
+        <section id="power" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-2">Taming the Giant</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">The same force that inspires awe also represents an immense source of energy. This section chronicles the ambitious saga of harnessing Niagara's power, a story of innovation, conflict, and engineering that lit up the world.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                 <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">The War of Currents</h3>
+                    <p class="text-gray-700 mb-4">The late 19th century saw a battle between Thomas Edison's direct current (DC) and Nikola Tesla's alternating current (AC). Niagara became the ultimate proving ground. In 1896, the Edward Dean Adams Power Station, using Tesla's AC technology, sent electricity 25 miles to Buffalo, NY. This event was a resounding victory for AC, establishing the system that powers our world today and marking the birth of the modern electrical grid.</p>
+                </div>
+                <div class="card p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">A Delicate Balance</h3>
+                    <p class="text-gray-700 mb-4">The insatiable demand for power clashed with tourism. The 1950 Niagara River Water Diversion Treaty was the solution. This international agreement dictates how much water can be diverted for power, ensuring a spectacular flow for tourists during the day while maximizing power generation at night. Up to 75% of the river's flow is redirected to power plants through massive tunnels.</p>
+                </div>
+            </div>
+
+            <div class="card p-6 rounded-lg">
+                <h3 class="text-2xl font-bold mb-4 text-center">Niagara vs. The World's Titans</h3>
+                <p class="text-center text-gray-600 mb-6">While not the tallest or widest, Niagara's power lies in its immense volume. This chart compares its mean annual flow rate to other famous waterfalls.</p>
+                <div class="chart-container">
+                    <canvas id="flowRateChart"></canvas>
+                </div>
+            </div>
+
+             <div class="card p-6 rounded-lg mt-8">
+                <h3 class="text-2xl font-bold mb-4 text-center">The Power of the Treaty</h3>
+                <p class="text-center text-gray-600 mb-6">See the dramatic impact of the 1950 treaty. Use the buttons to toggle between the river's total natural flow and the reduced flow seen by tourists during peak hours.</p>
+                <div class="flex justify-center space-x-4 mb-6">
+                    <button id="flow-natural" class="px-4 py-2 bg-blue-600 text-white rounded-md font-semibold">Total Natural Flow</button>
+                    <button id="flow-tourist" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-semibold">Daytime Tourist Flow</button>
+                </div>
+                <div class="chart-container" style="height: 250px; max-height: 40vh;">
+                    <canvas id="diversionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Experience the Falls -->
+        <section id="experience" class="content-section">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-2">Experience the Falls</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">A visit to Niagara is a tale of two views. The Canadian and American sides offer distinct perspectives and experiences, one of grand panoramas and spectacle, the other of intimate immersion in nature. Explore the key attractions of each side.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-6 rounded-lg border-t-4 border-red-500">
+                    <h3 class="text-2xl font-bold mb-4 text-center">🇨🇦 The Canadian Perspective: Panorama & Pageantry</h3>
+                    <p class="text-gray-600 mb-6 text-center">Offers sweeping, postcard-perfect views of all three falls and a bustling, commercialized hub of entertainment.</p>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Journey Behind the Falls</h4>
+                            <p class="text-sm text-gray-700">Descend 125 feet to tunnels and an observation deck at the base of the mighty Horseshoe Falls for a thunderous, mist-soaked experience.</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Skylon Tower</h4>
+                            <p class="text-sm text-gray-700">Ascend 520 feet for unparalleled 360-degree views of the Falls and surrounding region, stretching to Toronto and Buffalo on a clear day.</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Clifton Hill</h4>
+                            <p class="text-sm text-gray-700">A vibrant "street of fun" packed with wax museums, arcades, themed restaurants, and the iconic Niagara SkyWheel.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card p-6 rounded-lg border-t-4 border-blue-700">
+                    <h3 class="text-2xl font-bold mb-4 text-center">🇺🇸 The American Perspective: Immersion & Nature</h3>
+                     <p class="text-gray-600 mb-6 text-center">Focuses on getting you up-close and personal with the water's power within America's oldest state park.</p>
+                    <ul class="space-y-4">
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Cave of the Winds</h4>
+                            <p class="text-sm text-gray-700">Descend into the gorge and stand on the "Hurricane Deck," just feet from the thundering Bridal Veil Falls, for a drenching, exhilarating experience.</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Maid of the Mist</h4>
+                            <p class="text-sm text-gray-700">An iconic boat tour that journeys into the heart of the Horseshoe Falls basin, enveloping you in its powerful mist and roar.</p>
+                        </li>
+                        <li class="p-4 bg-gray-50 rounded-md hover:bg-gray-100">
+                            <h4 class="font-bold">Goat Island</h4>
+                            <p class="text-sm text-gray-700">A tranquil island offering unique, close-up views from the brink of both the American and Horseshoe Falls.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+            <p>An Interactive Journey Through Niagara. Data sourced from the "Niagara Falls: Comprehensive Overview" report.</p>
+            <p class="text-sm text-gray-400 mt-2">Created as an interactive single-page application.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const navButtons = document.querySelectorAll('.nav-button');
+    const mobileNav = document.getElementById('mobile-nav');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    function switchTab(targetId) {
+        contentSections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(targetId).classList.add('active');
+
+        navButtons.forEach(button => {
+            button.classList.toggle('active', button.dataset.target === targetId);
+        });
+        mobileNav.value = targetId;
+    }
+
+    navButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            switchTab(button.dataset.target);
+        });
+    });
+
+    mobileNav.addEventListener('change', (e) => {
+        switchTab(e.target.value);
+    });
+
+    function showTimelineInfo(id) {
+        const infoEl = document.getElementById(id);
+        infoEl.classList.toggle('hidden');
+    }
+    window.showTimelineInfo = showTimelineInfo;
+
+    const daredevils = [
+        { name: 'Sam Patch', year: 1829, type: 'Platform Jump', outcome: 'Survived' },
+        { name: 'The Great Blondin', year: 1859, type: 'Tightrope', outcome: 'Survived' },
+        { name: 'Annie Edson Taylor', year: 1901, type: 'Barrel', outcome: 'Survived' },
+        { name: 'Bobby Leach', year: 1911, type: 'Barrel', outcome: 'Survived' },
+        { name: 'Charles Stephens', year: 1920, type: 'Barrel', outcome: 'Fatal' },
+        { name: 'Jean Lussier', year: 1928, type: 'Rubber Ball', outcome: 'Survived' },
+        { name: 'George Stathakis', year: 1930, type: 'Barrel', outcome: 'Fatal' },
+        { name: 'Roger Woodward', year: 1960, type: 'Accidental Plunge', outcome: 'Survived' },
+        { name: 'Robert Overcracker', year: 1995, type: 'Jet Ski', outcome: 'Fatal' },
+        { name: 'Kirk Jones', year: 2003, type: 'Unassisted Plunge', outcome: 'Survived' },
+        { name: 'Nik Wallenda', year: 2012, type: 'Tightrope', outcome: 'Survived' },
+    ];
+
+    const daredevilGrid = document.getElementById('daredevil-grid');
+    function renderDaredevils(filter = 'all') {
+        daredevilGrid.innerHTML = '';
+        const filtered = daredevils.filter(d => {
+            if (filter === 'all') return true;
+            return d.outcome.toLowerCase() === filter;
+        });
+
+        filtered.forEach(d => {
+            const card = document.createElement('div');
+            card.className = `daredevil-card p-4 rounded-lg ${d.outcome === 'Survived' ? 'bg-green-50' : 'bg-red-50'}`;
+            card.innerHTML = `
+                <h4 class="font-bold text-lg">${d.name} (${d.year})</h4>
+                <p class="text-sm text-gray-600">Stunt: ${d.type}</p>
+                <p class="text-sm font-semibold ${d.outcome === 'Survived' ? 'text-green-700' : 'text-red-700'}">Outcome: ${d.outcome}</p>
+            `;
+            daredevilGrid.appendChild(card);
+        });
+    }
+
+    document.getElementById('filter-all').addEventListener('click', (e) => {
+        renderDaredevils('all');
+        updateFilterButtons(e.target);
+    });
+    document.getElementById('filter-survived').addEventListener('click', (e) => {
+        renderDaredevils('survived');
+        updateFilterButtons(e.target);
+    });
+    document.getElementById('filter-fatal').addEventListener('click', (e) => {
+        renderDaredevils('fatal');
+        updateFilterButtons(e.target);
+    });
+    
+    function updateFilterButtons(activeButton) {
+        document.querySelectorAll('#daredevil-grid + div button').forEach(button => {
+            button.classList.remove('bg-blue-600', 'text-white');
+            button.classList.add('bg-gray-200', 'text-gray-800');
+        });
+        activeButton.classList.add('bg-blue-600', 'text-white');
+        activeButton.classList.remove('bg-gray-200', 'text-gray-800');
+    }
+    
+    renderDaredevils();
+
+    const flowRateCtx = document.getElementById('flowRateChart').getContext('2d');
+    const flowRateChart = new Chart(flowRateCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Niagara Falls', 'Victoria Falls', 'Iguazu Falls'],
+            datasets: [{
+                label: 'Mean Annual Flow Rate (m³/s)',
+                data: [2407, 1088, 1756],
+                backgroundColor: ['#63B3ED', '#4FD1C5', '#F6AD55'],
+                borderColor: ['#2B6CB0', '#2C7A7B', '#B7791F'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: { display: false },
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Cubic Meters per Second (m³/s)'
+                    }
+                }
+            }
+        }
+    });
+
+    const diversionCtx = document.getElementById('diversionChart').getContext('2d');
+    const diversionData = {
+        labels: ['Flow Over Falls'],
+        datasets: [
+            {
+                label: 'Diverted for Power',
+                data: [0],
+                backgroundColor: '#A0AEC0',
+            },
+            {
+                label: 'Flow Over Falls',
+                data: [2800],
+                backgroundColor: '#63B3ED',
+            }
+        ]
+    };
+    const diversionChart = new Chart(diversionCtx, {
+        type: 'bar',
+        data: diversionData,
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    title: { display: true, text: 'Cubic Meters per Second (m³/s)' }
+                },
+                y: { stacked: true }
+            },
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed.x !== null) {
+                                label += context.parsed.x + ' m³/s';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    function updateDiversionChart(mode) {
+        const naturalFlow = 2407 * 2; // Approximating total flow based on tourist hours being about half
+        const touristFlow = 2800;
+        const naturalDiverted = 0;
+        const touristDiverted = naturalFlow - touristFlow;
+
+        if (mode === 'natural') {
+            diversionChart.data.datasets[0].data = [naturalDiverted];
+            diversionChart.data.datasets[1].data = [naturalFlow];
+            diversionChart.options.scales.x.max = naturalFlow;
+        } else {
+            diversionChart.data.datasets[0].data = [touristDiverted];
+            diversionChart.data.datasets[1].data = [touristFlow];
+            diversionChart.options.scales.x.max = naturalFlow;
+        }
+        diversionChart.update();
+    }
+    
+    document.getElementById('flow-natural').addEventListener('click', (e) => {
+        updateDiversionChart('natural');
+        document.getElementById('flow-tourist').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('flow-tourist').classList.add('bg-gray-200', 'text-gray-800');
+        e.target.classList.add('bg-blue-600', 'text-white');
+    });
+    document.getElementById('flow-tourist').addEventListener('click', (e) => {
+        updateDiversionChart('tourist');
+        document.getElementById('flow-natural').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('flow-natural').classList.add('bg-gray-200', 'text-gray-800');
+        e.target.classList.add('bg-blue-600', 'text-white');
+    });
+
+    updateDiversionChart('tourist');
+    document.getElementById('flow-tourist').click();
+});
+</script>
+
+</body>
+</html>

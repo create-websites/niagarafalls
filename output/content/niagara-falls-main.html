@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niagara Falls: Your Ultimate Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* A very light gray-blue */
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold text-blue-700">Niagara<span class="font-normal">Guide</span></a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-slate-600 hover:text-blue-600 font-semibold">The Falls</a>
+                    <a href="#attractions" class="text-slate-600 hover:text-blue-600 font-semibold">Things To Do</a>
+                    <a href="#planning" class="text-slate-600 hover:text-blue-600 font-semibold">Plan Your Visit</a>
+                    <a href="#legends" class="text-slate-600 hover:text-blue-600 font-semibold">Legends</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-white text-center overflow-hidden">
+        <img src="https://storage.googleapis.com/pkdsource/mac-22/niagara-falls-(1)/IMG_3048.JPG" alt="A majestic panoramic view of Niagara Falls" class="absolute top-0 left-0 w-full h-full object-cover">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 px-4 fade-in">
+            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.6);">Experience the Thunder</h1>
+            <p class="mt-4 text-lg md:text-2xl max-w-3xl mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">Discover the power, beauty, and history of one of the world's greatest natural wonders.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto max-w-6xl px-4 py-12 md:py-20 space-y-20">
+
+        <!-- About the Falls Section -->
+        <section id="about" class="fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">A Triptych of Power</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <p class="text-lg text-slate-600">Niagara Falls isn't just one waterfall—it's a magnificent group of three waterfalls at the southern end of Niagara Gorge. Spanning the border between the United States and Canada, they have the highest combined flow rate of any waterfall in North America.</p>
+                    <div class="space-y-3 pt-2">
+                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-blue-700">Horseshoe Falls (Canadian Side)</h3>
+                            <p class="text-sm text-slate-600">The largest and most powerful, carrying about 90% of the river's water.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-blue-700">American Falls</h3>
+                            <p class="text-sm text-slate-600">Known for its classic straight crest and the massive pile of rock (talus) at its base.</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+                            <h3 class="font-bold text-blue-700">Bridal Veil Falls</h3>
+                            <p class="text-sm text-slate-600">The smallest of the three, separated from the American Falls by Luna Island.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x450/3498db/ffffff?text=The+Three+Falls" alt="Diagram showing the three distinct waterfalls of Niagara" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Attractions Section -->
+        <section id="attractions" class="fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Unforgettable Things To Do</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card: Boat Tour -->
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://placehold.co/600x400/2ecc71/ffffff?text=Boat+Tour" alt="A tour boat filled with passengers in blue ponchos near the base of the falls" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Maid of the Mist & Hornblower</h3>
+                        <p class="text-slate-600 text-sm">The quintessential Niagara experience. Journey into the misty heart of the Horseshoe Falls and feel its immense power. A must-do on either side of the border.</p>
+                    </div>
+                </div>
+                <!-- Card: Cave of the Winds -->
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://placehold.co/600x400/9b59b6/ffffff?text=Cave+of+the+Winds" alt="Tourists in yellow ponchos on the Hurricane Deck" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Cave of the Winds (USA)</h3>
+                        <p class="text-slate-600 text-sm">Descend into the gorge and stand on the "Hurricane Deck," just feet from the thundering Bridal Veil Falls, for a drenching, exhilarating experience.</p>
+                    </div>
+                </div>
+                <!-- Card: Journey Behind the Falls -->
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://placehold.co/600x400/e67e22/ffffff?text=Behind+the+Falls" alt="A view of the water crashing down from an observation portal behind the falls" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Journey Behind the Falls (Canada)</h3>
+                        <p class="text-slate-600 text-sm">Explore 130-year-old tunnels that lead to observation decks directly behind the thundering sheet of the Horseshoe Falls for a unique perspective.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plan Your Visit Section -->
+        <section id="planning" class="fade-in bg-white p-8 md:p-12 rounded-lg shadow-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Plan Your Perfect Trip</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-3">Best Time to Visit</h3>
+                    <p class="text-slate-600 mb-4">While stunning year-round, each season offers a unique experience:</p>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><span class="font-semibold text-green-600 w-20">Summer:</span><span>Warmest weather, all attractions open, but largest crowds.</span></li>
+                        <li class="flex items-start"><span class="font-semibold text-orange-600 w-20">Fall:</span><span>Pleasant weather, fewer crowds, and beautiful autumn foliage.</span></li>
+                        <li class="flex items-start"><span class="font-semibold text-sky-600 w-20">Winter:</span><span>A magical frozen wonderland with unique ice formations.</span></li>
+                        <li class="flex items-start"><span class="font-semibold text-purple-600 w-20">Spring:</span><span>Powerful flow from melting snow as the region awakens.</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-3">Where to Stay & View</h3>
+                    <p class="text-slate-600 mb-4">For the ultimate experience, book a "Fallsview" room. The Canadian side offers the most direct, panoramic hotel views of both falls.</p>
+                    <ul class="space-y-2 text-sm">
+                        <li><strong class="font-semibold">Best Ground View (CAN):</strong> Table Rock Centre puts you right at the brink of the Horseshoe Falls.</li>
+                        <li><strong class="font-semibold">Best Ground View (USA):</strong> Prospect Point offers dramatic views alongside the American Falls.</li>
+                        <li><strong class="font-semibold">Insider Tip:</strong> Don't forget your passport! The views are different and worth seeing from both sides of the border.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legends and Daredevils Section -->
+        <section id="legends" class="fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Legends & Daredevils</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Legend Card -->
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/600x400/1f2937/d1d5db?text=Legend+of+the+Mist" alt="A silhouette of a canoe approaching a misty waterfall" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="font-bold text-xl mb-2">The Legend of the Maid of the Mist</h3>
+                        <p class="text-slate-600 text-sm">Discover the ancient Haudenosaunee legend of Lelawala, a young woman who entered the rapids and was caught by the thunder spirit Hinum, who lived in a cave behind the falls. Her spirit is said to remain, forever known as the Maid of the Mist.</p>
+                    </div>
+                </div>
+                <!-- Daredevil Card -->
+                <div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
+                    <img src="https://placehold.co/600x400/4a5568/e2e8f0?text=Daredevil's+Barrel" alt="An old wooden barrel used to go over the falls" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="font-bold text-xl mb-2">A History of Daredevils</h3>
+                        <p class="text-slate-600 text-sm">The Falls' fame has long attracted audacious individuals. In 1901, 63-year-old Annie Edson Taylor became the first person to survive going over the falls in a barrel, seeking fame and fortune but warning others never to repeat her stunt.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-300">
+        <div class="container mx-auto max-w-7xl px-4 py-8 text-center">
+            <p>&copy; 2025 Niagara Guide. All Rights Reserved.</p>
+            <p class="text-sm text-slate-400 mt-1">Your complete resource for exploring the majestic Niagara Falls.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple fade-in animation on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) { return; } 
+                else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+    </script>
+</body>
+</html>

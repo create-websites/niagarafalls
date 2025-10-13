@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Incredible History of Niagara Falls: From Ice Age to Instagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Timeline specific styles */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #cbd5e1;
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: 32px;
+            background-color: white;
+            border: 4px solid #4a5568;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold text-gray-800">Niagara<span class="font-normal text-gray-600">History</span></a>
+                <div class="hidden md:flex items-center space-x-8">
+                     <a href="#timeline" class="text-gray-600 hover:text-gray-900 font-semibold">Timeline</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-6xl px-4 py-8 md:py-16">
+
+        <!-- Header Section -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3 tracking-tight">The Incredible History of Niagara Falls</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">From its violent birth in the Ice Age to its status as a global icon in the age of Instagram.</p>
+        </header>
+
+        <main id="timeline" class="relative">
+            <div class="timeline-container">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">12,000 Years Ago: A Violent Birth</h2>
+                        <p class="text-gray-600">As the last Ice Age ended, massive glaciers retreated, carving out the Great Lakes. The meltwater formed the Niagara River, which plunged over the steep Niagara Escarpment, giving birth to the Falls.</p>
+                    </div>
+                </div>
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">Pre-1600s: Home of the "Thundering Waters"</h2>
+                        <p class="text-gray-600">For centuries, the Falls were home to Indigenous peoples, including the Iroquois. The name "Niagara" is believed to originate from the Iroquois word "Onguiaahra," meaning "The Strait" or "Thundering Waters."</p>
+                    </div>
+                </div>
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">1678: European Arrival</h2>
+                        <p class="text-gray-600">French priest Father Louis Hennepin was the first European to document the Falls, describing them in his book with awe and wonder. His writings introduced Niagara to the Western world, sparking immense curiosity.</p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 4 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">Early 1800s: The Rise of Tourism</h2>
+                        <p class="text-gray-600">With the arrival of railways, Niagara became an accessible tourist destination. It quickly gained a reputation as the "Honeymoon Capital of the World," a tradition that continues to this day.</p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 5 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">1901: The Daredevil Era</h2>
+                        <p class="text-gray-600">On her 63rd birthday, Annie Edson Taylor became the first person to survive a trip over the Falls in a barrel. Her stunt kicked off an era of daredevils attempting to conquer the mighty cataract.</p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 6 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">Late 1800s: Harnessing the Power</h2>
+                        <p class="text-gray-600">Innovators like Nikola Tesla saw the potential of the Falls for hydroelectric power. The first large-scale power plants were built, transforming industry and illuminating cities hundreds of miles away.</p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 7 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">1885: A New Era of Preservation</h2>
+                        <p class="text-gray-600">Worried about rampant commercialization, conservationists on both sides of the border established parks (Niagara Falls State Park in the U.S. and Queen Victoria Park in Canada) to protect the natural beauty for future generations.</p>
+                    </div>
+                </div>
+                 <!-- Timeline Item 8 -->
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <h2 class="font-bold text-xl mb-1 text-gray-800">Today: An Instagram Icon</h2>
+                        <p class="text-gray-600">Millions of visitors from around the globe now visit each year, capturing its beauty not just in their memories but on their social media feeds, ensuring its status as a timeless and iconic natural wonder.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 pt-8 border-t border-gray-200">
+            <p class="text-sm text-gray-500">&copy; 2025 Niagara History. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple fade-in animation on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) { return; } 
+                else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+    </script>
+</body>
+</html>

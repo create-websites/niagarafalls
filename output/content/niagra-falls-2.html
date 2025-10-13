@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niagara Falls: Your Ultimate Visitor Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0faff; /* Light blue background */
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0ea5e9;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1));
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="#" class="text-2xl font-bold text-sky-600">Niagara<span class="font-normal">Falls</span></a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#overview" class="nav-link text-gray-600 hover:text-sky-600 font-semibold">The Falls</a>
+                    <a href="#attractions" class="nav-link text-gray-600 hover:text-sky-600 font-semibold">Attractions</a>
+                    <a href="#facts" class="nav-link text-gray-600 hover:text-sky-600 font-semibold">Fun Facts</a>
+                    <a href="#" class="bg-sky-500 text-white px-5 py-2 rounded-full hover:bg-sky-600 transition-colors shadow">Plan Your Visit</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-5xl px-4 py-8 md:py-12">
+
+        <!-- Header Section -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-3 tracking-tight">Experience the Wonder of Niagara Falls</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">Your complete guide to exploring its stunning geography, geology, and world-famous attractions.</p>
+        </header>
+
+        <!-- Hero Image -->
+        <div class="mb-12 rounded-xl overflow-hidden shadow-2xl relative">
+            <img src="https://storage.googleapis.com/pkdsource/mac-22/niagara-falls-(1)/IMG_3048.JPG" alt="A majestic view of Niagara Falls with mist rising" class="w-full h-auto object-cover">
+            <div class="absolute inset-0 hero-gradient flex items-end p-8">
+                <h2 class="text-white text-3xl font-bold">Nature's masterpiece</h2>
+            </div>
+        </div>
+
+        <!-- Blog Content -->
+        <main class="space-y-16">
+
+            <!-- Section: Overview & Geography -->
+            <section id="overview" class="fade-in bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4 text-sky-700 border-b-2 border-sky-200 pb-3">The Three Majestic Falls</h2>
+                <div class="space-y-4 text-gray-700 mt-6">
+                    <p><strong class="font-semibold text-gray-800">Location:</strong> Straddling the international border between Ontario, Canada, and New York, USA, Niagara Falls is situated on the Niagara River, which connects Lake Erie to Lake Ontario.</p>
+                    <p><strong class="font-semibold text-gray-800">Three Waterfalls:</strong> It's not one, but three magnificent waterfalls. The mighty <span class="font-semibold">Horseshoe Falls</span> (or Canadian Falls) is the largest, with the <span class="font-semibold">American Falls</span> and the smaller <span class="font-semibold">Bridal Veil Falls</span> located on the U.S. side. Goat Island majestically separates the Horseshoe Falls from the other two.</p>
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2 text-gray-800">By the Numbers:</h3>
+                        <ul class="list-disc list-inside space-y-1 pl-2">
+                            <li><strong class="font-semibold">Horseshoe Falls:</strong> ~57 meters (~187 ft) high and ~790 meters wide.</li>
+                            <li><strong class="font-semibold">American Falls:</strong> ~21 to 30 meters high (due to boulders at its base) and ~320 meters wide.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Top Attractions -->
+            <section id="attractions" class="fade-in">
+                <h2 class="text-3xl font-bold mb-6 text-sky-700 text-center">Top Attractions</h2>
+                 <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Attraction Card 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <h3 class="font-bold text-xl text-green-700 mb-2">Maid of the Mist</h3>
+                        <p class="text-gray-600">Get up close and personal with the falls on this world-famous boat tour. Feel the spray and hear the thunderous roar from the base of the Horseshoe Falls.</p>
+                    </div>
+                     <!-- Attraction Card 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <h3 class="font-bold text-xl text-blue-700 mb-2">Cave of the Winds</h3>
+                        <p class="text-gray-600">Journey behind the Bridal Veil Falls. Clad in a souvenir poncho, stand on the "Hurricane Deck" just feet from the torrent of water.</p>
+                    </div>
+                     <!-- Attraction Card 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <h3 class="font-bold text-xl text-purple-700 mb-2">Skylon Tower</h3>
+                        <p class="text-gray-600">Soar 775 feet above the falls for breathtaking 360-degree views of the entire Niagara region from the observation deck.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Geology & Formation -->
+            <section class="fade-in bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4 text-sky-700 border-b-2 border-sky-200 pb-3">The Story of the Falls</h2>
+                <div class="space-y-4 text-gray-700 mt-6">
+                    <p><strong class="font-semibold text-gray-800">Glacial Origins:</strong> The falls are a relatively young geological feature, formed around 12,000 years ago as the last ice age ended. Melting glaciers unleashed massive volumes of water that carved the path of the Niagara River.</p>
+                    <p><strong class="font-semibold text-gray-800">Rock Layers & Erosion:</strong> The falls are constantly, slowly moving upstream. This is due to a hard, erosion-resistant cap rock of limestone sitting atop softer layers of shale and sandstone, which are worn away by the powerful water.</p>
+                </div>
+            </section>
+
+            <!-- Section: Interesting Facts -->
+            <section id="facts" class="fade-in bg-white p-6 md:p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-sky-700 border-b-2 border-sky-200 pb-3">Fascinating Facts</h2>
+                <ul class="list-none space-y-4 text-gray-700 mt-6">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-emerald-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong class="font-semibold text-gray-800">Emerald Green Water:</strong> The striking color isn't from pollution! It comes from finely ground rock particles (rock flour) and dissolved minerals carried by the river.</span>
+                    </li>
+                    <li class="flex items-start">
+                         <svg class="w-6 h-6 text-emerald-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong class="font-semibold text-gray-800">Slowing Erosion:</strong> The natural erosion rate has been significantly reduced due to water diversion for hydroelectric power.</span>
+                    </li>
+                    <li class="flex items-start">
+                         <svg class="w-6 h-6 text-emerald-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong class="font-semibold text-gray-800">Daredevil History:</strong> In 1901, 63-year-old Annie Edson Taylor became the first person to survive going over the falls in a barrel.</span>
+                    </li>
+                    <li class="flex items-start">
+                         <svg class="w-6 h-6 text-emerald-500 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span><strong class="font-semibold text-gray-800">Night Illumination:</strong> The falls are beautifully illuminated with colorful lights every night, creating a spectacular sight after dusk.</span>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-sm text-gray-500">&copy; 2025 Niagara Falls Visitor Guide. All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Simple fade-in animation on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) { return; } 
+                else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

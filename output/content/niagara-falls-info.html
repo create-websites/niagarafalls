@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niagara Falls: An Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: A linear, narrative-driven, single-page infographic designed for scrolling. The story flows from the immense scale of the Falls, to its geological formation, its human history of daredevils, the monumental harnessing of its power, and finally its context among world waterfalls. This structure guides the user through a logical progression of understanding, starting with the "what" and moving through the "how" and "why." -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Total water flow -> Goal: Inform -> Viz: Single Big Number -> Justification: Creates a powerful, immediate hook.
+        - Report Info: Three falls comparison -> Goal: Compare -> Viz: Bar Chart (Chart.js) -> Justification: Clearly compares the height and width of the three distinct falls.
+        - Report Info: Water flow distribution -> Goal: Inform -> Viz: Donut Chart (Chart.js) -> Justification: Shows the dramatic 90/10 split in flow between Horseshoe and the American falls.
+        - Report Info: Geological retreat -> Goal: Change -> Viz: Timeline (HTML/CSS) -> Justification: Visually represents the 12,000-year journey in a simple, scrollable format.
+        - Report Info: Daredevil history -> Goal: Organize/Rank -> Viz: Ordered List with Icons -> Justification: Presents key figures and their fates in an engaging, easy-to-scan list.
+        - Report Info: Hydroelectric water diversion -> Goal: Inform -> Viz: Donut Chart (Chart.js) -> Justification: Effectively communicates the 75% water diversion for power at night.
+        - Report Info: Global waterfall comparison -> Goal: Compare -> Viz: Grouped Bar Chart (Chart.js) -> Justification: Allows for a multi-variable comparison of Niagara against its global peers.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F7FF; /* Lightest Blue */
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 18px;
+            height: 100%;
+            width: 4px;
+            background: #90CDF4; /* Medium Blue */
+        }
+        .timeline-item {
+            position: relative;
+            margin-left: 40px;
+            margin-bottom: 2rem;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -23px;
+            top: 5px;
+            height: 20px;
+            width: 20px;
+            background: #2C5282; /* Darkest Blue */
+            border-radius: 50%;
+            border: 3px solid #F0F7FF;
+        }
+    </style>
+</head>
+<body class="bg-blue-50 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8">
+
+        <header class="text-center py-12">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-[#0A2463] text-shadow">NIAGARA FALLS</h1>
+            <p class="text-xl md:text-2xl text-[#3E60C1] mt-4 font-semibold">Anatomy of a Natural Wonder</p>
+        </header>
+
+        <section class="text-center bg-[#3E60C1] text-white rounded-xl shadow-2xl p-8 md:p-12 my-12">
+            <h2 class="text-2xl font-bold mb-4">A River's Relentless Rush</h2>
+            <p class="text-lg text-blue-100 mb-6">The combined power of the Great Lakes culminates in the Niagara River, which carries an immense volume of water over the falls every second.</p>
+            <div class="text-6xl md:text-8xl font-extrabold text-shadow">2,407</div>
+            <p class="text-2xl mt-2 font-semibold">Cubic Meters Per Second (m³/s)</p>
+            <p class="text-sm text-blue-200 mt-2">(Mean Annual Flow Rate)</p>
+        </section>
+
+        <section class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#0A2463]">A Triptych of Power</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">Niagara Falls is not one, but three distinct waterfalls. The mighty Horseshoe Falls carries the vast majority of the water, dwarfing its American counterparts.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4 text-[#0A2463]">Flow Distribution</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="flowDistributionChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">The Horseshoe Falls accounts for approximately 90% of the Niagara River's total flow, concentrating immense erosive power on its crescent-shaped crest.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4 text-[#0A2463]">By the Numbers: Height & Width</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="fallsComparisonChart"></canvas>
+                    </div>
+                    <p class="text-center text-gray-600 mt-4">While the American Falls has a higher vertical drop to its base of rocks (talus), the Horseshoe Falls is significantly taller, wider, and more powerful.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#0A2463]">A 12,000-Year Retreat</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">Born from melting glaciers, the Falls have been relentlessly carving their way upstream for millennia, a journey recorded in the 11km (7 mile) long Niagara Gorge.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="font-bold text-xl text-[#2C5282]">12,000 Years Ago: The Birth</h3>
+                        <p class="text-gray-700">The Falls are formed at the Niagara Escarpment near modern-day Lewiston, NY, as glacial meltwater begins to pour over the cliff.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="font-bold text-xl text-[#2C5282]">Pre-1900s: Natural Erosion</h3>
+                        <p class="text-gray-700">The Falls retreat at a rapid pace, estimated at 3 to 5 feet per year, constantly reshaping the landscape.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="font-bold text-xl text-[#2C5282]">20th Century: Human Intervention</h3>
+                        <p class="text-gray-700">Large-scale water diversion for hydroelectric power dramatically slows the erosion rate to about 1 foot per year.</p>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h3 class="font-bold text-xl text-[#2C5282]">The Future: 50,000 Years?</h3>
+                        <p class="text-gray-700">Without human intervention, geologists estimate the Falls would erode all the way to Lake Erie in 50,000 years, draining it completely.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#0A2463]">Dancing on the Brink</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">The Falls' fame has long attracted daredevils seeking to conquer it for fame and fortune. Their stories are a bizarre and often tragic chronicle of human audacity.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <ul class="space-y-6">
+                    <li class="flex items-center">
+                        <span class="text-3xl mr-4">🤸</span>
+                        <div>
+                            <h4 class="font-bold text-lg">1859: The Great Blondin</h4>
+                            <p class="text-gray-600">Crossed the gorge on a tightrope, even carrying his manager on his back.</p>
+                        </div>
+                        <span class="ml-auto text-green-500 font-bold">Survived</span>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-3xl mr-4">🛢️</span>
+                        <div>
+                            <h4 class="font-bold text-lg">1901: Annie Edson Taylor</h4>
+                            <p class="text-gray-600">A 63-year-old teacher, she was the first person to survive going over in a barrel.</p>
+                        </div>
+                        <span class="ml-auto text-green-500 font-bold">Survived</span>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-3xl mr-4">💥</span>
+                        <div>
+                            <h4 class="font-bold text-lg">1920: Charles Stephens</h4>
+                            <p class="text-gray-600">His barrel, weighed down with an anvil, disintegrated on impact.</p>
+                        </div>
+                        <span class="ml-auto text-red-500 font-bold">Fatal</span>
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-3xl mr-4">🐢</span>
+                        <div>
+                            <h4 class="font-bold text-lg">1930: George Stathakis</h4>
+                            <p class="text-gray-600">Survived the fall but suffocated when his barrel was trapped behind the water for 18 hours. His pet turtle survived.</p>
+                        </div>
+                        <span class="ml-auto text-red-500 font-bold">Fatal</span>
+                    </li>
+                     <li class="flex items-center">
+                        <span class="text-3xl mr-4">🚶</span>
+                        <div>
+                            <h4 class="font-bold text-lg">2012: Nik Wallenda</h4>
+                            <p class="text-gray-600">First person to walk a tightrope directly over the brink of the Falls in a massive televised event.</p>
+                        </div>
+                        <span class="ml-auto text-green-500 font-bold">Survived</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#0A2463]">Taming the Giant</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">The same force that inspires awe also represents an immense source of energy. The 1950 Niagara River Water Diversion Treaty allows for a delicate balance between scenic beauty and power generation.</p>
+            </div>
+             <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4 text-[#0A2463]">Water Diversion at Night</h3>
+                    <div class="chart-container h-64 md:h-80">
+                        <canvas id="diversionChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-center h-full">
+                    <h3 class="text-xl font-bold text-[#0A2463] mb-2">A Tale of Two Flows</h3>
+                    <p class="text-gray-700 mb-4">To ensure a spectacular view for tourists, the flow is kept high during the day. At night and in the off-season, the flow is drastically reduced.</p>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-bold text-lg text-[#3E60C1]">Daytime Tourist Hours:</p>
+                            <p class="text-2xl font-extrabold text-[#0A2463]">2,800 m³/s</p>
+                            <p class="text-gray-600">(Minimum flow over falls)</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-lg text-[#3E60C1]">Night & Off-Season:</p>
+                            <p class="text-2xl font-extrabold text-[#0A2463]">1,400 m³/s</p>
+                            <p class="text-gray-600">(Minimum flow over falls)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-[#0A2463]">Niagara on the World Stage</h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">While not the tallest or widest, Niagara's power lies in its immense volume. Here's how it compares to other world-famous waterfalls.</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="chart-container" style="height: 450px; max-height: 60vh;">
+                    <canvas id="worldComparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const chartColors = {
+        darkBlue: '#0A2463',
+        mediumBlue: '#3E60C1',
+        lightBlue: '#90CDF4',
+        accent: '#FFC857',
+    };
+
+    const defaultChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#2D3748',
+                    font: {
+                        family: "'Inter', sans-serif",
+                        weight: '600'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: '#0A2463',
+                titleFont: { size: 16, family: "'Inter', sans-serif" },
+                bodyFont: { size: 14, family: "'Inter', sans-serif" },
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        }
+                        return label;
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                ticks: { color: '#4A5568' },
+                grid: { color: '#E2E8F0' }
+            },
+            x: {
+                ticks: { color: '#4A5568' },
+                grid: { display: false }
+            }
+        }
+    };
+
+    function wrapLabel(str) {
+        const maxLength = 16;
+        if (str.length <= maxLength) return str;
+        const words = str.split(' ');
+        let lines = [];
+        let currentLine = '';
+        for (const word of words) {
+            if ((currentLine + word).length > maxLength) {
+                lines.push(currentLine.trim());
+                currentLine = '';
+            }
+            currentLine += word + ' ';
+        }
+        lines.push(currentLine.trim());
+        return lines;
+    }
+
+    const flowDistributionCtx = document.getElementById('flowDistributionChart').getContext('2d');
+    new Chart(flowDistributionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Horseshoe Falls', 'American & Bridal Veil Falls'],
+            datasets: [{
+                data: [90, 10],
+                backgroundColor: [chartColors.mediumBlue, chartColors.lightBlue],
+                borderColor: '#F0F7FF',
+                borderWidth: 4
+            }]
+        },
+        options: { ...defaultChartOptions, cutout: '60%' }
+    });
+
+    const fallsComparisonCtx = document.getElementById('fallsComparisonChart').getContext('2d');
+    new Chart(fallsComparisonCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Horseshoe', 'American', 'Bridal Veil'],
+            datasets: [
+                {
+                    label: 'Height (m)',
+                    data: [57, 30, 24],
+                    backgroundColor: chartColors.mediumBlue,
+                },
+                {
+                    label: 'Width (m)',
+                    data: [790, 320, 17],
+                    backgroundColor: chartColors.lightBlue,
+                }
+            ]
+        },
+        options: defaultChartOptions
+    });
+    
+    const diversionCtx = document.getElementById('diversionChart').getContext('2d');
+    new Chart(diversionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Diverted for Power', 'Flows Over Falls'],
+            datasets: [{
+                data: [75, 25],
+                backgroundColor: [chartColors.darkBlue, chartColors.mediumBlue],
+                borderColor: '#FFFFFF',
+                borderWidth: 4
+            }]
+        },
+        options: { ...defaultChartOptions, cutout: '60%' }
+    });
+
+    const worldComparisonCtx = document.getElementById('worldComparisonChart').getContext('2d');
+    const worldLabels = ['Niagara Falls', 'Victoria Falls', 'Iguazu Falls'];
+    new Chart(worldComparisonCtx, {
+        type: 'bar',
+        data: {
+            labels: worldLabels.map(wrapLabel),
+            datasets: [
+                {
+                    label: 'Max Height (m)',
+                    data: [57, 108, 82],
+                    backgroundColor: chartColors.darkBlue,
+                },
+                {
+                    label: 'Max Width (m)',
+                    data: [1203, 1708, 2700],
+                    backgroundColor: chartColors.mediumBlue,
+                },
+                {
+                    label: 'Mean Flow (m³/s)',
+                    data: [2407, 1088, 1756],
+                    backgroundColor: chartColors.lightBlue,
+                }
+            ]
+        },
+        options: defaultChartOptions
+    });
+});
+</script>
+
+</body>
+</html>
