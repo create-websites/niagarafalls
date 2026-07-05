@@ -1,200 +1,655 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Niagara Falls: Your Ultimate Guide</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* A very light gray-blue */
-        }
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .hero-gradient {
-            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
-        }
-        .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body class="text-slate-800">
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Niagara Falls: Interactive Travel Journal</title>
+<meta content="A travel-blog themed interactive guide to Niagara Falls, covering its geology, human history, hydroelectric power, daredevils, and visitor experiences on the Canadian and American sides." name="description"/>
+<meta content="index, follow, max-image-preview:large" name="robots"/>
+<meta content="Prashant Dhingra" name="author"/>
+<meta content="article" property="og:type"/>
+<meta content="Niagara Falls: Interactive Travel Journal" property="og:title"/>
+<meta content="Explore the power of nature, the human story, hydroelectric engineering, and the best ways to experience Niagara Falls in a warm travel-blog layout." property="og:description"/>
+<meta content="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls.JPG" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Niagara Falls: Interactive Travel Journal" name="twitter:title"/>
+<meta content="A travel-blog themed interactive journey through Niagara Falls." name="twitter:description"/>
+<meta content="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls.JPG" name="twitter:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"Niagara Falls: Interactive Travel Journal",
+  "author":{"@type":"Person","name":"Prashant Dhingra"},
+  "about":{"@type":"TouristAttraction","name":"Niagara Falls"},
+  "image":"https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls.JPG"
+}
+</script>
+<style>
+:root{
+  --paper:#FBF4E8;
+  --paper-deep:#F3E1C4;
+  --paper-soft:#FFF9EF;
+  --ink:#25343B;
+  --muted:#66777A;
+  --teal:#087D78;
+  --teal-dark:#075F5C;
+  --terracotta:#C96442;
+  --terracotta-dark:#9F452D;
+  --gold:#D49B45;
+  --sage:#DDE8D8;
+  --sky:#DCEFF1;
+  --card:#FFFCF5;
+  --danger:#B3473B;
+  --success:#2F7D5B;
+  --shadow:0 24px 70px rgba(45,57,54,.16);
+  --line:rgba(37,52,59,.14);
+  --line-strong:rgba(37,52,59,.24);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --hand:'Caveat',cursive;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at top left,rgba(8,125,120,.08),transparent 34rem),
+    linear-gradient(180deg,var(--paper) 0%,#F7EBD7 54%,#F5E4C9 100%);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button,select{font:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.kicker{font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta)}
+.hand{font-family:var(--hand);font-size:1.65rem;color:var(--teal);line-height:1.05}
+h1,h2,h3{font-family:var(--serif);font-weight:700;letter-spacing:-.025em;line-height:1.04}
+p{color:var(--muted)}
 
-    <!-- Navigation Bar -->
-    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto max-w-7xl px-4">
-            <div class="flex justify-between items-center py-4">
-                <a href="#" class="text-2xl font-bold text-blue-700">Niagara<span class="font-normal">Guide</span></a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-slate-600 hover:text-blue-600 font-semibold">The Falls</a>
-                    <a href="#attractions" class="text-slate-600 hover:text-blue-600 font-semibold">Things To Do</a>
-                    <a href="#planning" class="text-slate-600 hover:text-blue-600 font-semibold">Plan Your Visit</a>
-                    <a href="#legends" class="text-slate-600 hover:text-blue-600 font-semibold">Legends</a>
-                </div>
-            </div>
+.nav{position:sticky;top:0;z-index:70;background:rgba(251,244,232,.88);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav-inner{height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink)}
+.brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;box-shadow:0 10px 30px rgba(8,125,120,.24)}
+.brand-name{font-family:var(--serif);font-size:1.3rem}.brand-name span{color:var(--terracotta)}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-button{border:0;background:transparent;color:var(--muted);font-size:.78rem;font-weight:800;letter-spacing:.02em;padding:10px 12px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.nav-button:hover,.nav-button.active{background:rgba(8,125,120,.1);color:var(--teal-dark)}
+.mobile-nav{display:none;border:1px solid var(--line);background:var(--card);padding:9px 12px;border-radius:999px;color:var(--ink);font-weight:700;max-width:230px}
+@media(max-width:900px){.nav-links{display:none}.mobile-nav{display:block}.nav-inner{height:68px}.brand-name{font-size:1.08rem}}
+
+.hero{position:relative;min-height:90vh;display:grid;align-items:end;background:#112b2d;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,29,33,.88) 0%,rgba(9,29,33,.58) 46%,rgba(9,29,33,.22) 100%),linear-gradient(180deg,rgba(9,29,33,.08) 0%,rgba(9,29,33,.18) 45%,rgba(9,29,33,.78) 100%)}
+.hero-content{position:relative;z-index:2;color:#fff;width:100%;padding:92px 0 56px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 365px;gap:44px;align-items:end}
+.hero .kicker{color:#FFD998;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+.hero h1{font-size:clamp(3.1rem,8vw,7.2rem);max-width:12ch;color:#fff;text-shadow:0 18px 50px rgba(0,0,0,.38);margin:14px 0 20px}
+.hero h1 em{font-style:italic;color:#FFD998;font-weight:600}
+.hero-copy{max-width:63ch;color:rgba(255,255,255,.89);font-size:1.08rem;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:13px 18px;font-weight:800;font-size:.86rem;letter-spacing:.01em;transition:transform .2s,box-shadow .2s,background .2s}.btn-primary{background:#fff;color:var(--ink);box-shadow:0 18px 50px rgba(0,0,0,.18)}.btn-secondary{border:1px solid rgba(255,255,255,.45);color:#fff;background:rgba(255,255,255,.09)}.btn:hover{transform:translateY(-2px)}
+.passport-card{position:relative;background:rgba(255,252,245,.93);color:var(--ink);border:1px solid rgba(255,255,255,.5);border-radius:26px;padding:24px;box-shadow:var(--shadow);overflow:hidden}.passport-card:before{content:"";position:absolute;right:-34px;top:-34px;width:118px;height:118px;border:2px dashed rgba(201,100,66,.42);border-radius:50%;transform:rotate(-14deg)}.passport-card .stamp{font-family:var(--hand);font-size:2.15rem;color:var(--terracotta);transform:rotate(-6deg);display:inline-block;margin-bottom:10px}.passport-card h2{font-size:1.55rem;margin-bottom:8px}.passport-card p{font-size:.94rem}.trip-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.trip-meta div{padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(251,244,232,.72)}.trip-meta b{display:block;font-family:var(--serif);font-size:1.28rem;color:var(--teal-dark);line-height:1}.trip-meta small{display:block;margin-top:6px;text-transform:uppercase;letter-spacing:.12em;font-size:.6rem;font-weight:800;color:var(--muted)}
+@media(max-width:920px){.hero-grid{grid-template-columns:1fr}.passport-card{max-width:540px}.hero{min-height:auto}.hero-content{padding:72px 0 42px}}
+@media(max-width:600px){.hero h1{font-size:3rem}.trip-meta{grid-template-columns:1fr}.hero-copy{font-size:1rem}.cta-row .btn{width:100%;justify-content:center}}
+
+.journal-tabs{position:relative;z-index:3;margin-top:-32px}.tabs-card{background:rgba(255,252,245,.94);border:1px solid var(--line);border-radius:28px;box-shadow:0 18px 60px rgba(91,65,30,.13);padding:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.tab-card{border:1px solid transparent;background:transparent;border-radius:20px;text-align:left;padding:15px 16px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}.tab-card b{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--ink);line-height:1.1}.tab-card span{display:block;margin-top:6px;text-transform:uppercase;letter-spacing:.12em;font-size:.6rem;font-weight:800;color:var(--muted)}.tab-card.active,.tab-card:hover{background:var(--paper-soft);border-color:rgba(201,100,66,.28);transform:translateY(-2px)}.tab-card.active span{color:var(--terracotta)}@media(max-width:860px){.journal-tabs{display:none}}
+
+.section{padding:92px 0;position:relative}.section-soft{background:rgba(255,252,245,.54);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.section-head{max-width:740px;margin-bottom:42px}.section-head h2{font-size:clamp(2rem,4vw,3.35rem);margin:12px 0 16px;color:var(--ink)}.section-head p{font-size:1.02rem}.content-section{display:none}.content-section.active{display:block}.route-divider{height:52px;display:flex;align-items:center;justify-content:center;margin:-8px 0 2px}.route-line{width:min(260px,56vw);height:24px;position:relative}.route-line:before{content:"";position:absolute;left:0;right:0;top:9px;border-top:2px dashed rgba(8,125,120,.45)}.route-line:after{content:"";position:absolute;left:50%;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:-70px 4px 0 -3px var(--teal),70px 4px 0 -3px var(--teal)}
+
+.story-intro{display:grid;grid-template-columns:minmax(0,1.08fr) 360px;gap:44px;align-items:center}.lede-card{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:42px;box-shadow:0 24px 80px rgba(91,65,30,.09)}.lede-card h2{font-size:clamp(2rem,4vw,3.5rem);margin:12px 0 18px}.lede-card p{font-size:1.03rem;margin-top:14px}.pull-note{margin-top:24px;padding:20px 22px;background:var(--sky);border-left:5px solid var(--teal);border-radius:18px;color:var(--ink);font-weight:700}.polaroid{background:#fff;border:1px solid var(--line);padding:14px 14px 20px;border-radius:8px;box-shadow:0 18px 45px rgba(0,0,0,.13);transform:rotate(2deg)}.polaroid img{height:390px;width:100%;object-fit:cover;border-radius:3px}.polaroid figcaption{font-family:var(--hand);font-size:1.55rem;color:var(--terracotta);text-align:center;margin-top:12px}@media(max-width:900px){.story-intro{grid-template-columns:1fr}.polaroid{max-width:440px}.lede-card{padding:30px}}
+
+.fact-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:34px}.fact{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 18px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 14px 40px rgba(91,65,30,.06)}.fact b{font-family:var(--serif);font-size:1.7rem;color:var(--teal-dark);line-height:1.05}.fact span{text-transform:uppercase;letter-spacing:.12em;font-size:.65rem;color:var(--muted);font-weight:800}@media(max-width:900px){.fact-row{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.fact-row{grid-template-columns:1fr}}
+
+.nature-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:34px;align-items:start}.notebook-card{background:#fff;border:1px solid var(--line);border-radius:30px;padding:30px;box-shadow:var(--shadow);background-image:linear-gradient(#fff 0,#fff 31px,rgba(8,125,120,.08) 32px);background-size:100% 32px}.notebook-card h3{font-size:1.7rem;margin-bottom:18px}.note{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:13px 0;border-top:1px solid var(--line);font-size:.93rem}.note:first-of-type{border-top:0}.note b{color:var(--ink)}.note span:first-child{font-family:var(--serif);color:var(--terracotta);font-size:1.25rem;font-weight:700;line-height:1.25}.rock-card{position:sticky;top:96px;background:var(--teal-dark);color:#fff;border-radius:30px;padding:30px;box-shadow:var(--shadow);overflow:hidden}.rock-card:after{content:"";position:absolute;right:-42px;bottom:-42px;width:138px;height:138px;border-radius:50%;border:2px dashed rgba(255,217,152,.35)}.rock-card .hand{color:#FFD998}.rock-card h3{font-size:1.65rem;margin:8px 0 14px;color:#fff}.rock-card p{color:rgba(255,255,255,.82)}.rock-stack{margin-top:18px;display:grid;gap:10px}.layer{position:relative;border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px;background:rgba(255,255,255,.08)}.layer b{display:block;color:#fff}.layer span{display:block;margin-top:3px;color:rgba(255,255,255,.78);font-size:.87rem}.layer.cap{background:rgba(255,217,152,.18);border-color:rgba(255,217,152,.34)}@media(max-width:900px){.nature-grid{grid-template-columns:1fr}.rock-card{position:static}}
+
+.timeline{position:relative;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:32px;box-shadow:0 18px 55px rgba(91,65,30,.08);margin-top:36px}.timeline:before{content:"";position:absolute;left:39px;top:50px;bottom:50px;border-left:2px dashed rgba(8,125,120,.25)}.timeline h3{font-size:1.8rem;margin:0 0 22px 0}.timeline-item{position:relative;padding:0 0 18px 48px;cursor:pointer}.timeline-item:last-child{padding-bottom:0}.timeline-dot{position:absolute;left:0;top:5px;width:17px;height:17px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 7px var(--sage)}.timeline-item h4{font-family:var(--serif);font-size:1.3rem;color:var(--ink);line-height:1.1}.timeline-item h4 span{font-family:var(--sans);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);font-weight:800;margin-left:8px}.timeline-info{max-height:0;overflow:hidden;transition:max-height .28s ease,opacity .28s ease;margin-top:0;opacity:0;color:var(--muted)}.timeline-item.open .timeline-info{max-height:180px;opacity:1;margin-top:8px}.timeline-item:hover h4{color:var(--teal-dark)}@media(max-width:560px){.timeline{padding:24px}.timeline:before{left:31px}.timeline-item{padding-left:42px}.timeline-item h4 span{display:block;margin-left:0;margin-top:4px}}
+
+.history-grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:34px;align-items:start}.postcard-stack{display:grid;gap:18px}.postcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:26px;padding:24px 24px 24px 86px;box-shadow:0 20px 55px rgba(91,65,30,.08);overflow:hidden}.postcard:before{content:attr(data-no);position:absolute;left:22px;top:22px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--sage);color:var(--teal-dark);font-family:var(--serif);font-weight:700;font-size:1.2rem}.postcard h3{font-size:1.45rem;margin-bottom:8px}.postcard p{font-size:.95rem}.field-card{position:sticky;top:96px;background:var(--paper-soft);border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:var(--shadow)}.field-card h3{font-size:1.65rem;margin:8px 0 14px}.field-card p{font-size:.94rem}.field-list{display:grid;gap:12px;margin-top:18px}.field-list div{padding:13px 0;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}.field-list b{color:var(--ink)}@media(max-width:900px){.history-grid{grid-template-columns:1fr}.field-card{position:static}}@media(max-width:560px){.postcard{padding:78px 20px 22px}.postcard:before{left:20px}}
+
+.filters{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:26px 0}.filter-button,.flow-button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 15px;font-size:.82rem;font-weight:800;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}.filter-button.active,.flow-button.active,.filter-button:hover,.flow-button:hover{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-1px)}.daredevil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.daredevil-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 16px 42px rgba(91,65,30,.06);transition:transform .25s,border-color .25s}.daredevil-card:hover{transform:translateY(-5px);border-color:rgba(201,100,66,.42)}.daredevil-card h4{font-family:var(--serif);font-size:1.2rem;color:var(--ink)}.daredevil-card p{font-size:.87rem}.outcome{display:inline-block;margin-top:12px;padding:6px 10px;border-radius:999px;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.outcome.survived{background:rgba(47,125,91,.12);color:var(--success)}.outcome.fatal{background:rgba(179,71,59,.13);color:var(--danger)}@media(max-width:900px){.daredevil-grid{grid-template-columns:1fr 1fr}}@media(max-width:620px){.daredevil-grid{grid-template-columns:1fr}}
+
+.power-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:28px}.power-card,.chart-card,.experience-card{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:30px;box-shadow:0 20px 60px rgba(91,65,30,.08)}.power-card h3,.chart-card h3{font-size:1.55rem;margin-bottom:10px}.power-card p,.chart-card p{font-size:.94rem}.chart-card{margin-top:24px}.chart-container{position:relative;width:100%;height:390px;max-height:55vh;margin-top:22px}.chart-container.small{height:270px;max-height:42vh}.chart-note{margin-top:12px;font-size:.8rem;color:var(--muted);text-align:center}.flow-buttons{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:22px 0 4px}@media(max-width:860px){.power-grid{grid-template-columns:1fr}.chart-container{height:340px}.chart-container.small{height:240px}}
+
+.experience-hero{position:relative;min-height:520px;border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.35);box-shadow:var(--shadow);display:flex;align-items:end;background:#102225;margin-bottom:34px}.experience-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.experience-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,29,33,.92),rgba(9,29,33,.56),rgba(9,29,33,.18))}.experience-content{position:relative;z-index:2;max-width:680px;padding:48px;color:#fff}.experience-content .kicker{color:#FFD998}.experience-content h2{font-size:clamp(2rem,4vw,3.25rem);margin:12px 0 16px;color:#fff}.experience-content p{color:rgba(255,255,255,.86)}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.09);color:#fff;font-size:.78rem;font-weight:800}.chip b{color:#FFD998}@media(max-width:640px){.experience-content{padding:32px 24px}.experience-hero:after{background:linear-gradient(0deg,rgba(9,29,33,.95) 18%,rgba(9,29,33,.45) 100%)}}
+
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.side-card{background:#fff;border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:0 18px 52px rgba(91,65,30,.08)}.side-card.canada{border-top:6px solid var(--terracotta)}.side-card.usa{border-top:6px solid var(--teal)}.side-card h3{font-size:1.65rem;margin-bottom:8px}.side-card>p{font-size:.94rem;margin-bottom:18px}.attraction-list{display:grid;gap:12px}.attraction{background:var(--paper-soft);border:1px solid var(--line);border-radius:18px;padding:16px;transition:background .2s,transform .2s,border-color .2s}.attraction:hover{background:#fff;transform:translateX(4px);border-color:rgba(201,100,66,.35)}.attraction h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:5px}.attraction p{font-size:.88rem}@media(max-width:860px){.compare-grid{grid-template-columns:1fr}}
+
+.gallery-strip{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px;margin-top:34px}.gallery-shot{position:relative;min-height:260px;border:10px solid #fff;border-bottom-width:38px;border-radius:14px;box-shadow:0 18px 50px rgba(91,65,30,.12);overflow:hidden;background:#fff;transform:rotate(-.8deg)}.gallery-shot:nth-child(2){transform:rotate(1.2deg)}.gallery-shot:nth-child(3){transform:rotate(.6deg)}.gallery-shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.gallery-shot span{position:absolute;left:14px;right:14px;bottom:7px;font-family:var(--hand);font-size:1.25rem;color:var(--terracotta-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}@media(max-width:800px){.gallery-strip{grid-template-columns:1fr}.gallery-shot{min-height:280px;transform:none!important}}
+
+footer{background:#203336;color:#fff;padding:58px 0 34px;margin-top:0}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:34px}.footer-brand{font-family:var(--serif);font-size:1.7rem;font-weight:800}.footer-brand span{color:#FFD998}footer p,footer a{color:rgba(255,255,255,.72)}footer p{max-width:44ch;margin-top:12px;font-size:.94rem}footer h4{text-transform:uppercase;letter-spacing:.15em;font-size:.68rem;color:#FFD998;margin-bottom:12px}footer a{display:block;padding:5px 0;font-size:.91rem}footer a:hover{color:#fff}.footer-bottom{border-top:1px solid rgba(255,255,255,.16);padding-top:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:rgba(255,255,255,.56);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}@media(max-width:760px){.footer-grid{grid-template-columns:1fr}}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .72s ease,transform .72s ease}.reveal.in{opacity:1;transform:none}:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}}
+</style>
+<link href="https://storage.googleapis.com/css-designs/purple/kreatewebsites.production.css" rel="stylesheet"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BNC62LBZEM"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BNC62LBZEM');
+</script></head>
+<body>
+
+<nav aria-label="Primary" class="nav">
+  <div class="wrap nav-inner">
+    <a aria-label="Niagara interactive journal home" class="brand" href="#top">
+      <span class="brand-mark">N</span>
+      <span class="brand-name">Niagara<span> Fall </span></span>
+    </a>
+    <div aria-label="Journey sections" class="nav-links">
+      <button class="nav-button active" data-target="nature">Nature</button>
+      <button class="nav-button" data-target="human">Human Story</button>
+      <button class="nav-button" data-target="power">Power</button>
+      <button class="nav-button" data-target="experience">Experience</button>
+    </div>
+    <select aria-label="Choose a section" class="mobile-nav" id="mobile-nav">
+      <option value="nature">Nature</option>
+      <option value="human">Human Story</option>
+      <option value="power">Power</option>
+      <option value="experience">Experience</option>
+    </select>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img alt="Niagara Falls on a bright day with mist rising from the gorge" class="hero-img" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls.JPG"/>
+  <div class="hero-content">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Interactive Travel Journal</span>
+        <h1>Niagara Falls, <em>page by page</em></h1>
+        <p class="hero-copy">A field-guide style journey through the forces that carved the gorge, the people drawn to its brink, the power stations that learned from the river, and the two-border experience travelers come to photograph.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#journal">Open the journal</a>
+          <a class="btn btn-secondary" data-go-target="experience" href="#journal">Compare both sides</a>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="relative h-[60vh] md:h-[80vh] flex items-center justify-center text-white text-center overflow-hidden">
-        <img src="https://storage.googleapis.com/pkdsource/mac-22/niagara-falls-(1)/IMG_3048.JPG" alt="A majestic panoramic view of Niagara Falls" class="absolute top-0 left-0 w-full h-full object-cover">
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 px-4 fade-in">
-            <h1 class="text-4xl md:text-7xl font-extrabold tracking-tight" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.6);">Experience the Thunder</h1>
-            <p class="mt-4 text-lg md:text-2xl max-w-3xl mx-auto" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">Discover the power, beauty, and history of one of the world's greatest natural wonders.</p>
+      </div>
+      <aside aria-label="Niagara quick facts" class="passport-card">
+        <span class="stamp">Stamped at the Brink</span>
+        <h2>Four ways to read the falls</h2>
+        <p>This recreation keeps the original page's non-linear structure: nature, human history, hydroelectric power, and visitor experience.</p>
+        <div class="trip-meta">
+          <div><b>12k</b><small>years since glacial birth</small></div>
+          <div><b>11 km</b><small>gorge carved upstream</small></div>
+          <div><b>3</b><small>waterfalls in one system</small></div>
+          <div><b>2</b><small>countries at the brink</small></div>
         </div>
-    </header>
+      </aside>
+    </div>
+  </div>
+</header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto max-w-6xl px-4 py-12 md:py-20 space-y-20">
+<div class="journal-tabs" id="journal">
+  <div class="wrap">
+    <div aria-label="Journal themes" class="tabs-card" role="tablist">
+      <button class="tab-card active" data-target="nature"><b>The Power of Nature</b><span>Geology and erosion</span></button>
+      <button class="tab-card" data-target="human"><b>The Human Story</b><span>History and daredevils</span></button>
+      <button class="tab-card" data-target="power"><b>Taming the Giant</b><span>Energy and flow</span></button>
+      <button class="tab-card" data-target="experience"><b>Experience the Falls</b><span>Canada and USA</span></button>
+    </div>
+  </div>
+</div>
 
-        <!-- About the Falls Section -->
-        <section id="about" class="fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">A Triptych of Power</h2>
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="space-y-4">
-                    <p class="text-lg text-slate-600">Niagara Falls isn't just one waterfall—it's a magnificent group of three waterfalls at the southern end of Niagara Gorge. Spanning the border between the United States and Canada, they have the highest combined flow rate of any waterfall in North America.</p>
-                    <div class="space-y-3 pt-2">
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
-                            <h3 class="font-bold text-blue-700">Horseshoe Falls (Canadian Side)</h3>
-                            <p class="text-sm text-slate-600">The largest and most powerful, carrying about 90% of the river's water.</p>
-                        </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
-                            <h3 class="font-bold text-blue-700">American Falls</h3>
-                            <p class="text-sm text-slate-600">Known for its classic straight crest and the massive pile of rock (talus) at its base.</p>
-                        </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
-                            <h3 class="font-bold text-blue-700">Bridal Veil Falls</h3>
-                            <p class="text-sm text-slate-600">The smallest of the three, separated from the American Falls by Luna Island.</p>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <img src="https://placehold.co/600x450/3498db/ffffff?text=The+Three+Falls" alt="Diagram showing the three distinct waterfalls of Niagara" class="rounded-lg shadow-xl w-full h-auto object-cover">
-                </div>
-            </div>
-        </section>
+<main>
+  <section class="content-section active" id="nature">
+    <div class="section">
+      <div class="wrap story-intro">
+        <article class="lede-card reveal">
+          <span class="kicker">The Power of Nature</span>
+          <h2>A landscape carved by ice, stone, and moving water</h2>
+          <p>Niagara's story begins far before the modern river. Ancient seas laid down layered rocks, and the last Ice Age rearranged the Great Lakes basin. As the Wisconsin Glacier melted roughly 12,000 years ago, enormous volumes of water found a route from Lake Erie toward Lake Ontario and began cutting the Niagara Gorge.</p>
+          <p>The falls are dramatic because the rock is uneven. Hard Lockport Dolostone acts as a capstone, while softer shales below are easier for the river to undercut. As the base erodes, unsupported caprock breaks away, letting the brink retreat upstream.</p>
+          <div class="pull-note">Travel note: this is why the falls are not frozen in place. The view you see today is a moment in a long migration through the escarpment.</div>
+        </article>
+        <figure class="polaroid reveal">
+          <img alt="Boat tour approaching the mist at Niagara Falls" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Fall%20Boat%20Tour.JPG"/>
+          <figcaption>Where the gorge still grows</figcaption>
+        </figure>
+      </div>
+      <div aria-label="Nature facts" class="wrap fact-row reveal">
+        <div class="fact"><b>Lockport</b><span>hard dolostone caprock</span></div>
+        <div class="fact"><b>Shale</b><span>softer underlayers erode first</span></div>
+        <div class="fact"><b>11 km</b><span>approximate gorge journey</span></div>
+        <div class="fact"><b>50k</b><span>years to Lake Erie, estimated without intervention</span></div>
+      </div>
+    </div>
 
-        <!-- Top Attractions Section -->
-        <section id="attractions" class="fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Unforgettable Things To Do</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card: Boat Tour -->
-                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://placehold.co/600x400/2ecc71/ffffff?text=Boat+Tour" alt="A tour boat filled with passengers in blue ponchos near the base of the falls" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Maid of the Mist & Hornblower</h3>
-                        <p class="text-slate-600 text-sm">The quintessential Niagara experience. Journey into the misty heart of the Horseshoe Falls and feel its immense power. A must-do on either side of the border.</p>
-                    </div>
-                </div>
-                <!-- Card: Cave of the Winds -->
-                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://placehold.co/600x400/9b59b6/ffffff?text=Cave+of+the+Winds" alt="Tourists in yellow ponchos on the Hurricane Deck" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Cave of the Winds (USA)</h3>
-                        <p class="text-slate-600 text-sm">Descend into the gorge and stand on the "Hurricane Deck," just feet from the thundering Bridal Veil Falls, for a drenching, exhilarating experience.</p>
-                    </div>
-                </div>
-                <!-- Card: Journey Behind the Falls -->
-                <div class="card bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://placehold.co/600x400/e67e22/ffffff?text=Behind+the+Falls" alt="A view of the water crashing down from an observation portal behind the falls" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl mb-2">Journey Behind the Falls (Canada)</h3>
-                        <p class="text-slate-600 text-sm">Explore 130-year-old tunnels that lead to observation decks directly behind the thundering sheet of the Horseshoe Falls for a unique perspective.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="route-divider"><div aria-hidden="true" class="route-line"></div></div>
 
-        <!-- Plan Your Visit Section -->
-        <section id="planning" class="fade-in bg-white p-8 md:p-12 rounded-lg shadow-lg">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Plan Your Perfect Trip</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-3">Best Time to Visit</h3>
-                    <p class="text-slate-600 mb-4">While stunning year-round, each season offers a unique experience:</p>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start"><span class="font-semibold text-green-600 w-20">Summer:</span><span>Warmest weather, all attractions open, but largest crowds.</span></li>
-                        <li class="flex items-start"><span class="font-semibold text-orange-600 w-20">Fall:</span><span>Pleasant weather, fewer crowds, and beautiful autumn foliage.</span></li>
-                        <li class="flex items-start"><span class="font-semibold text-sky-600 w-20">Winter:</span><span>A magical frozen wonderland with unique ice formations.</span></li>
-                        <li class="flex items-start"><span class="font-semibold text-purple-600 w-20">Spring:</span><span>Powerful flow from melting snow as the region awakens.</span></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 border-l-4 border-blue-500 pl-3">Where to Stay & View</h3>
-                    <p class="text-slate-600 mb-4">For the ultimate experience, book a "Fallsview" room. The Canadian side offers the most direct, panoramic hotel views of both falls.</p>
-                    <ul class="space-y-2 text-sm">
-                        <li><strong class="font-semibold">Best Ground View (CAN):</strong> Table Rock Centre puts you right at the brink of the Horseshoe Falls.</li>
-                        <li><strong class="font-semibold">Best Ground View (USA):</strong> Prospect Point offers dramatic views alongside the American Falls.</li>
-                        <li><strong class="font-semibold">Insider Tip:</strong> Don't forget your passport! The views are different and worth seeing from both sides of the border.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Legends and Daredevils Section -->
-        <section id="legends" class="fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-slate-900">Legends & Daredevils</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Legend Card -->
-                <div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                    <img src="https://placehold.co/600x400/1f2937/d1d5db?text=Legend+of+the+Mist" alt="A silhouette of a canoe approaching a misty waterfall" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="font-bold text-xl mb-2">The Legend of the Maid of the Mist</h3>
-                        <p class="text-slate-600 text-sm">Discover the ancient Haudenosaunee legend of Lelawala, a young woman who entered the rapids and was caught by the thunder spirit Hinum, who lived in a cave behind the falls. Her spirit is said to remain, forever known as the Maid of the Mist.</p>
-                    </div>
-                </div>
-                <!-- Daredevil Card -->
-                <div class="card bg-white rounded-lg shadow-md overflow-hidden flex flex-col">
-                    <img src="https://placehold.co/600x400/4a5568/e2e8f0?text=Daredevil's+Barrel" alt="An old wooden barrel used to go over the falls" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="font-bold text-xl mb-2">A History of Daredevils</h3>
-                        <p class="text-slate-600 text-sm">The Falls' fame has long attracted audacious individuals. In 1901, 63-year-old Annie Edson Taylor became the first person to survive going over the falls in a barrel, seeking fame and fortune but warning others never to repeat her stunt.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-slate-800 text-slate-300">
-        <div class="container mx-auto max-w-7xl px-4 py-8 text-center">
-            <p>&copy; 2025 Niagara Guide. All Rights Reserved.</p>
-            <p class="text-sm text-slate-400 mt-1">Your complete resource for exploring the majestic Niagara Falls.</p>
+    <div class="section section-soft">
+      <div class="wrap nature-grid">
+        <div>
+          <div class="section-head reveal">
+            <span class="kicker">Field Notes</span>
+            <h2>The engine of erosion</h2>
+            <p>The original interactive page explained the falls as differential erosion: a strong upper layer over weaker rock. This travel-journal version keeps that science but presents it like a notebook from the brink.</p>
+          </div>
+          <article class="notebook-card reveal">
+            <h3>How the cliff renews itself</h3>
+            <div class="note"><span>01</span><div><b>Water falls over the caprock.</b> The river pours over the resistant Lockport Dolostone, creating the hard lip of the waterfall.</div></div>
+            <div class="note"><span>02</span><div><b>Spray and force attack the base.</b> Turbulence erodes the softer shale and sandstone beneath the capstone, forming an undercut notch.</div></div>
+            <div class="note"><span>03</span><div><b>The overhang weakens.</b> Unsupported blocks of caprock fracture, collapse, and add boulders to the base.</div></div>
+            <div class="note"><span>04</span><div><b>The brink shifts upstream.</b> The same cycle repeats, preserving the drop while slowly migrating the falls toward Lake Erie.</div></div>
+          </article>
         </div>
-    </footer>
+        <aside class="rock-card reveal">
+          <span class="hand">rock layers</span>
+          <h3>A simple cliff cross-section</h3>
+          <p>The geometry of Niagara is a stacked story. Hard rock protects the top; softer rock below gives way first.</p>
+          <div aria-label="Rock layer diagram" class="rock-stack">
+            <div class="layer cap"><b>Lockport Dolostone</b><span>Hard caprock forming the crest.</span></div>
+            <div class="layer"><b>Rochester Shale</b><span>Softer middle layer, vulnerable to undercutting.</span></div>
+            <div class="layer"><b>Queenston Shale</b><span>Soft lower layer in the gorge walls.</span></div>
+          </div>
+        </aside>
+      </div>
+      <div aria-label="Niagara retreat timeline" class="wrap timeline reveal">
+        <h3>A relentless retreat: an 11 km journey</h3>
+        <div class="timeline-item open" tabindex="0">
+          <span class="timeline-dot"></span>
+          <h4>12,000 years ago <span>The birth</span></h4>
+          <p class="timeline-info">The falls formed along the edge of the Niagara Escarpment as meltwater from retreating glaciers carved the Niagara River route.</p>
+        </div>
+        <div class="timeline-item" tabindex="0">
+          <span class="timeline-dot"></span>
+          <h4>Before the 1900s <span>Natural erosion</span></h4>
+          <p class="timeline-info">The original page notes a historic retreat rate of about 3 to 5 feet annually before large-scale intervention and flow control.</p>
+        </div>
+        <div class="timeline-item" tabindex="0">
+          <span class="timeline-dot"></span>
+          <h4>20th century <span>Human intervention</span></h4>
+          <p class="timeline-info">Hydropower diversions reduced the amount of water flowing over the crest, slowing erosion to roughly 1 foot annually in the page's summary.</p>
+        </div>
+        <div class="timeline-item" tabindex="0">
+          <span class="timeline-dot"></span>
+          <h4>The far future <span>50,000 years?</span></h4>
+          <p class="timeline-info">Without human intervention, geologists estimate the falls could eventually erode back toward Lake Erie, altering the drainage of the lake system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Simple fade-in animation on scroll
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) { return; } 
-                else {
-                    entry.target.classList.add('visible');
-                    appearOnScroll.unobserve(entry.target);
-                }
-            });
-        }, appearOptions);
-        faders.forEach(fader => { appearOnScroll.observe(fader); });
-    </script>
-</body>
-</html>
+  <section class="content-section" id="human">
+    <div class="section">
+      <div class="wrap history-grid">
+        <div>
+          <div class="section-head reveal">
+            <span class="kicker">The Human Story</span>
+            <h2>From sacred ground to public wonder</h2>
+            <p>Niagara has been more than a view. It has been a spiritual landmark, a borderland, a battleground, a commercial spectacle, and one of North America's early conservation victories.</p>
+          </div>
+          <div class="postcard-stack reveal">
+            <article class="postcard" data-no="01">
+              <h3>First Peoples and meaning</h3>
+              <p>The original page traces human connection to roughly 13,000 years ago, when the falls and river landscape held spiritual significance for the first inhabitants of the region.</p>
+            </article>
+            <article class="postcard" data-no="02">
+              <h3>Conflict and settlement</h3>
+              <p>European settlement in the 1600s changed the river corridor into a contested border zone, with the War of 1812 adding another layer to the landscape's story.</p>
+            </article>
+            <article class="postcard" data-no="03">
+              <h3>Conservation before it was fashionable</h3>
+              <p>By the 1800s, intense tourism threatened the falls' natural character. Frederick Law Olmsted and others championed public access and protection, leading to parks in 1885 in the United States and 1888 in Canada.</p>
+            </article>
+          </div>
+        </div>
+        <aside class="field-card reveal">
+          <span class="hand">people at the brink</span>
+          <h3>A traveler's way to read the history</h3>
+          <p>Walk the park paths like chapters. Look for overlooks, bridges, signs, old tunnels, power canals, and the carefully protected public edges that make Niagara feel open rather than fenced away.</p>
+          <div class="field-list">
+            <div><b>Spiritual landscape:</b> a place of thunder, mist, and story long before tourism.</div>
+            <div><b>Border landscape:</b> a river shared by Ontario and New York.</div>
+            <div><b>Public landscape:</b> a protected park system created to keep views accessible.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="section section-soft">
+      <div class="wrap">
+        <div class="section-head reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+          <span class="kicker">Dancing on the Brink</span>
+          <h2>A history of daredevils</h2>
+          <p>Filter the journal cards by outcome. The original interactive page presented Niagara's daredevils as a gallery; this version keeps the sorting but gives the cards a scrapbook feel.</p>
+        </div>
+        <div aria-label="Daredevil filters" class="filters reveal">
+          <button class="filter-button active" data-filter="all">All</button>
+          <button class="filter-button" data-filter="survived">Survived</button>
+          <button class="filter-button" data-filter="fatal">Fatal</button>
+        </div>
+        <div class="daredevil-grid reveal" id="daredevil-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="power">
+    <div class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker">Taming the Giant</span>
+          <h2>The river that helped teach the world to transmit power</h2>
+          <p>Niagara's energy story is a mix of invention, engineering, politics, and restraint. The same water that amazes travelers also became a laboratory for modern electricity.</p>
+        </div>
+        <div class="power-grid">
+          <article class="power-card reveal">
+            <span class="hand">1896</span>
+            <h3>The War of Currents</h3>
+            <p>The page highlights Niagara's decisive role in the late-1800s contest between direct current and alternating current. The Edward Dean Adams Power Station used Tesla's AC system to transmit electricity about 25 miles to Buffalo, helping establish AC as the foundation of modern grids.</p>
+          </article>
+          <article class="power-card reveal">
+            <span class="hand">1950 treaty</span>
+            <h3>A delicate balance</h3>
+            <p>The Niagara River Water Diversion Treaty balanced scenic flow with electricity production. During some periods, large shares of the river can be diverted through tunnels and plants, while daylight scenic flows are protected for visitors.</p>
+          </article>
+        </div>
+
+        <article class="chart-card reveal">
+          <h3>Niagara vs. the world's titans</h3>
+          <p>Niagara is not the tallest or widest waterfall, but the original page emphasizes its volume. Hover the bars to compare average annual flow rates with Victoria Falls and Iguazu Falls.</p>
+          <div class="chart-container"><canvas aria-label="Mean annual flow rate comparison chart" id="flowRateChart"></canvas></div>
+        </article>
+
+        <article class="chart-card reveal">
+          <h3>The power of the treaty</h3>
+          <p>Toggle between a simplified natural-flow view and a daytime scenic-flow view. The demonstration mirrors the source page's idea: flow management makes the tourist experience and power generation coexist.</p>
+          <div aria-label="Flow chart modes" class="flow-buttons">
+            <button class="flow-button" data-mode="natural" id="flow-natural">Total natural flow</button>
+            <button class="flow-button active" data-mode="tourist" id="flow-tourist">Daytime tourist flow</button>
+          </div>
+          <div class="chart-container small"><canvas aria-label="Water diversion comparison chart" id="diversionChart"></canvas></div>
+          <p class="chart-note">Values are a simplified visualization based on the uploaded page's demonstration numbers.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="experience">
+    <div class="section" id="experience-section">
+      <div class="wrap">
+        <div class="experience-hero reveal">
+          <img alt="Fallsview hotel perspective of Niagara Falls" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls%20view%20from%20Hotel.JPG"/>
+          <div class="experience-content">
+            <span class="kicker">Experience the Falls</span>
+            <h2>Two countries, two very different ways to meet the water</h2>
+            <p>The Canadian side gives the sweeping panorama and pageantry. The American side puts you close to islands, decks, and the brink. The best trip reads both shorelines as one landscape.</p>
+            <div class="chips">
+              <span class="chip"><b>Canada:</b> panorama</span>
+              <span class="chip"><b>USA:</b> immersion</span>
+              <span class="chip"><b>Bridge:</b> passport needed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="compare-grid">
+          <article class="side-card canada reveal">
+            <h3>Canada: panorama and pageantry</h3>
+            <p>Best for wide, postcard views of all three falls plus a busy entertainment district close to the rim.</p>
+            <div class="attraction-list">
+              <div class="attraction"><h4>Journey Behind the Falls</h4><p>Descend to tunnels and a viewing deck at the base of Horseshoe Falls for a roaring, mist-filled encounter.</p></div>
+              <div class="attraction"><h4>Skylon Tower</h4><p>Ride up to a high 360-degree observation view across the falls, gorge, and surrounding region.</p></div>
+              <div class="attraction"><h4>Clifton Hill</h4><p>A lively strip of arcades, museums, themed restaurants, and the Niagara SkyWheel.</p></div>
+            </div>
+          </article>
+          <article class="side-card usa reveal">
+            <h3>USA: immersion and nature</h3>
+            <p>Best for intimate access to the brink, islands, park paths, and spray-soaked experiences.</p>
+            <div class="attraction-list">
+              <div class="attraction"><h4>Cave of the Winds</h4><p>Walk gorge decks near Bridal Veil Falls, including the famous Hurricane Deck during the main season.</p></div>
+              <div class="attraction"><h4>Maid of the Mist</h4><p>A classic boat ride into the mist at the base of Horseshoe Falls, surrounded by thunder and spray.</p></div>
+              <div class="attraction"><h4>Goat Island</h4><p>A quieter island vantage point between the American and Horseshoe Falls, with close views of the brink.</p></div>
+            </div>
+          </article>
+        </div>
+
+        <div aria-label="Niagara photo notes" class="gallery-strip reveal">
+          <figure class="gallery-shot"><img alt="Niagara Falls lit in color at night" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls%20color%20in%20night.JPG"/><span>After dark illumination</span></figure>
+          <figure class="gallery-shot"><img alt="Niagara Falls at midnight" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20Falls%20at%20Midnight.JPG"/><span>Midnight over the gorge</span></figure>
+          <figure class="gallery-shot"><img alt="Niagara-on-the-Lake streetscape" src="https://storage.googleapis.com/kreatewebsites/photos1000/Niagara%20on%20Lake.JPG"/><span>Side trip: Niagara-on-the-Lake</span></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-gray-800 text-gray-300">
+<div class="container mx-auto px-6 py-12 lg:px-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Road Hana</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Home</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/photos-blog/">Photos and Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Canada Side</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Things to do</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Boat Tripe</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">sight seeing</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Stories</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Folders</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/">Reference</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/crossing-the-niagara-border.html">Crossing The Niagara Border</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/e-to-stand-at-niagara-falls-view.html">E To Stand At Niagara Falls View</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/niagara-fall-geography.html">Niagara Fall Geography</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/niagara-falls-best-view-point-chatgpt.html">Niagara Falls Best View Point Chatgpt</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/niagara-falls-history-with-time.html">Niagara Falls History With Time</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/niagara-falls-travel-blog.html">Niagara Falls Travel Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/select-best-niagrafalls-hotel-for-best-view.html">Select Best Niagrafalls Hotel For Best View</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/sitemap.html">Sitemap</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/stories-of-niagara-falls.html">Stories Of Niagara Falls</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/things-to-do-at-niagara-falls.html">Things To Do At Niagara Falls</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 text-center text-sm text-gray-400">
+<p class="text-sm text-gray-400">Niagara Falls</p>
+</div>
+<div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+<p class="text-sm text-gray-400">© 2026 Niagara Falls. All rights reserved.</p>
+</div>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const navButtons = Array.from(document.querySelectorAll('.nav-button'));
+  const tabCards = Array.from(document.querySelectorAll('.tab-card'));
+  const mobileNav = document.getElementById('mobile-nav');
+  const contentSections = Array.from(document.querySelectorAll('.content-section'));
+  let flowRateChart = null;
+  let diversionChart = null;
+
+  function resizeCharts(){
+    setTimeout(function(){
+      if(flowRateChart) flowRateChart.resize();
+      if(diversionChart) diversionChart.resize();
+    }, 80);
+  }
+
+  function switchTab(targetId, shouldScroll) {
+    contentSections.forEach(function(section){ section.classList.toggle('active', section.id === targetId); });
+    navButtons.forEach(function(button){ button.classList.toggle('active', button.dataset.target === targetId); });
+    tabCards.forEach(function(button){ button.classList.toggle('active', button.dataset.target === targetId); });
+    if(mobileNav) mobileNav.value = targetId;
+    resizeCharts();
+    if(shouldScroll){
+      const journal = document.getElementById('journal');
+      if(journal) journal.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+
+  navButtons.forEach(function(button){
+    button.addEventListener('click', function(){ switchTab(button.dataset.target, true); });
+  });
+  tabCards.forEach(function(button){
+    button.addEventListener('click', function(){ switchTab(button.dataset.target, false); });
+  });
+  if(mobileNav){
+    mobileNav.addEventListener('change', function(e){ switchTab(e.target.value, true); });
+  }
+  document.querySelectorAll('[data-footer-target]').forEach(function(link){
+    link.addEventListener('click', function(){ switchTab(link.dataset.footerTarget, true); });
+  });
+  document.querySelectorAll('[data-go-target]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      switchTab(link.dataset.goTarget, true);
+    });
+  });
+
+  document.querySelectorAll('.timeline-item').forEach(function(item){
+    function toggle(){ item.classList.toggle('open'); }
+    item.addEventListener('click', toggle);
+    item.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+  });
+
+  const daredevils = [
+    { name: 'Sam Patch', year: 1829, type: 'Platform Jump', outcome: 'Survived' },
+    { name: 'The Great Blondin', year: 1859, type: 'Tightrope', outcome: 'Survived' },
+    { name: 'Annie Edson Taylor', year: 1901, type: 'Barrel', outcome: 'Survived' },
+    { name: 'Bobby Leach', year: 1911, type: 'Barrel', outcome: 'Survived' },
+    { name: 'Charles Stephens', year: 1920, type: 'Barrel', outcome: 'Fatal' },
+    { name: 'Jean Lussier', year: 1928, type: 'Rubber Ball', outcome: 'Survived' },
+    { name: 'George Stathakis', year: 1930, type: 'Barrel', outcome: 'Fatal' },
+    { name: 'Roger Woodward', year: 1960, type: 'Accidental Plunge', outcome: 'Survived' },
+    { name: 'Robert Overcracker', year: 1995, type: 'Jet Ski', outcome: 'Fatal' },
+    { name: 'Kirk Jones', year: 2003, type: 'Unassisted Plunge', outcome: 'Survived' },
+    { name: 'Nik Wallenda', year: 2012, type: 'Tightrope', outcome: 'Survived' }
+  ];
+
+  const daredevilGrid = document.getElementById('daredevil-grid');
+  function renderDaredevils(filter) {
+    if(!daredevilGrid) return;
+    daredevilGrid.innerHTML = '';
+    daredevils.filter(function(d){ return filter === 'all' || d.outcome.toLowerCase() === filter; }).forEach(function(d){
+      const card = document.createElement('article');
+      card.className = 'daredevil-card';
+      const outcomeClass = d.outcome.toLowerCase();
+      card.innerHTML = '<h4>' + d.name + '</h4>' +
+        '<p><strong>Year:</strong> ' + d.year + '</p>' +
+        '<p><strong>Stunt:</strong> ' + d.type + '</p>' +
+        '<span class="outcome ' + outcomeClass + '">' + d.outcome + '</span>';
+      daredevilGrid.appendChild(card);
+    });
+  }
+
+  document.querySelectorAll('.filter-button').forEach(function(button){
+    button.addEventListener('click', function(){
+      document.querySelectorAll('.filter-button').forEach(function(b){ b.classList.remove('active'); });
+      button.classList.add('active');
+      renderDaredevils(button.dataset.filter);
+    });
+  });
+  renderDaredevils('all');
+
+  const chartFont = getComputedStyle(document.body).fontFamily;
+  const css = getComputedStyle(document.documentElement);
+  const teal = css.getPropertyValue('--teal').trim();
+  const terracotta = css.getPropertyValue('--terracotta').trim();
+  const gold = css.getPropertyValue('--gold').trim();
+  const muted = css.getPropertyValue('--muted').trim();
+  const sage = css.getPropertyValue('--sage').trim();
+
+  Chart.defaults.font.family = chartFont;
+  Chart.defaults.color = muted;
+
+  const flowCanvas = document.getElementById('flowRateChart');
+  if(flowCanvas){
+    flowRateChart = new Chart(flowCanvas.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Niagara Falls', 'Victoria Falls', 'Iguazu Falls'],
+        datasets: [{
+          label: 'Mean annual flow rate (m^3/s)',
+          data: [2407, 1088, 1756],
+          backgroundColor: [teal, terracotta, gold],
+          borderColor: ['#075F5C', '#9F452D', '#A86B16'],
+          borderWidth: 1,
+          borderRadius: 12
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx){ return ctx.parsed.y + ' m^3/s'; } } } },
+        scales: { y: { beginAtZero: true, grid: { color: 'rgba(37,52,59,.10)' }, title: { display: true, text: 'Cubic meters per second (m^3/s)' } }, x: { grid: { display:false } } }
+      }
+    });
+  }
+
+  const diversionCanvas = document.getElementById('diversionChart');
+  if(diversionCanvas){
+    diversionChart = new Chart(diversionCanvas.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Niagara River flow'],
+        datasets: [
+          { label: 'Diverted for power', data: [2014], backgroundColor: sage, borderRadius: 12 },
+          { label: 'Flow over falls', data: [2800], backgroundColor: teal, borderRadius: 12 }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true, max: 4814, grid: { color: 'rgba(37,52,59,.10)' }, title: { display: true, text: 'Cubic meters per second (m^3/s)' } },
+          y: { stacked: true, grid: { display: false } }
+        },
+        plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label + ': ' + ctx.parsed.x + ' m^3/s'; } } } }
+      }
+    });
+  }
+
+  function updateDiversion(mode){
+    if(!diversionChart) return;
+    const naturalFlow = 4814;
+    const touristFlow = 2800;
+    if(mode === 'natural'){
+      diversionChart.data.datasets[0].data = [0];
+      diversionChart.data.datasets[1].data = [naturalFlow];
+    } else {
+      diversionChart.data.datasets[0].data = [naturalFlow - touristFlow];
+      diversionChart.data.datasets[1].data = [touristFlow];
+    }
+    diversionChart.update();
+    document.querySelectorAll('.flow-button').forEach(function(button){ button.classList.toggle('active', button.dataset.mode === mode); });
+  }
+  document.querySelectorAll('.flow-button').forEach(function(button){ button.addEventListener('click', function(){ updateDiversion(button.dataset.mode); }); });
+  updateDiversion('tourist');
+
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  if(!('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el){ observer.observe(el); });
+  }
+});
+</script>
+
+</body></html>

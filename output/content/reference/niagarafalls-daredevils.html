@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Daredevils of Niagara: People Who Went Over the Falls</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #d1d5db; /* Light gray text */
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .story-card {
+            background-color: #1f2937;
+            border-left: 4px solid #6366f1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+        .header-glow {
+            text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+        }
+    </style>
+<link href="https://storage.googleapis.com/css-designs/purple/kreatewebsites.production.css" rel="stylesheet"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BNC62LBZEM"></script><script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-BNC62LBZEM');
+</script></head>
+<body class="antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="flex justify-between items-center py-4">
+                <a class="text-2xl font-bold text-white" href="#">Niagara<span class="font-normal text-indigo-400">Legends</span></a>
+                <div class="hidden md:flex items-center space-x-8">
+                     <a class="text-gray-300 hover:text-indigo-400 font-semibold" href="#stories">The Stories</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mx-auto max-w-6xl px-4 py-8 md:py-16">
+
+        <!-- Header Section -->
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight header-glow">Daredevils of Niagara</h1>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">The daring exploits of individuals who dared to defy the Falls stories of feats, endurance, and sorrow.</p>
+        </header>
+
+        <main class="space-y-12" id="stories">
+
+            <!-- Story: Annie Edson Taylor -->
+            <div class="story-card rounded-lg shadow-xl p-6 md:p-8 grid md:grid-cols-3 gap-8 fade-in">
+                <div class="md:col-span-2">
+                    <p class="text-sm font-semibold text-indigo-400">October 24, 1901</p>
+                    <h2 class="text-3xl font-bold text-white mt-1 mb-3">Annie Edson Taylor: The First to Survive</h2>
+                    <p class="text-gray-300">For her 63rd birthday, Annie Edson Taylor, a schoolteacher, attempted to gain fame and fortune by locking herself inside a specially made barrel of oak and leather. Towed into the river, she went over the Horseshoe Falls and resurfaced 17 minutes later, injured but alive. She famously advised, 'Never try that again.'</p>
+                </div>
+                <img alt="Illustration of a wooden barrel" class="rounded-lg object-cover w-full h-full" src="https://placehold.co/400x400/1f2937/d1d5db?text=Barrel"/>
+            </div>
+
+            <!-- Story: Bobby Leach -->
+            <div class="story-card rounded-lg shadow-xl p-6 md:p-8 grid md:grid-cols-3 gap-8 fade-in">
+                 <div class="md:col-span-2">
+                    <p class="text-sm font-semibold text-indigo-400">July 25, 1911</p>
+                    <h2 class="text-3xl font-bold text-white mt-1 mb-3">Bobby Leach: The First Man</h2>
+                    <p class="text-gray-300">A decade after Taylor's feat, English daredevil Bobby Leach braved the falls in a custom steel barrel. Although he survived, he endured a six-month hospital stay to heal from two shattered kneecaps and a broken jaw. Tragically, 15 years later, he succumbed to an infection after slipping on an orange peel in New Zealand.</p>
+                </div>
+                <img alt="Illustration of a steel barrel" class="rounded-lg object-cover w-full h-full" src="https://placehold.co/400x400/1f2937/d1d5db?text=Steel+Barrel"/>
+            </div>
+
+            <!-- Story: Roger Woodward -->
+            <div class="story-card rounded-lg shadow-xl p-6 md:p-8 grid md:grid-cols-3 gap-8 fade-in">
+                 <div class="md:col-span-2">
+                    <p class="text-sm font-semibold text-indigo-400">July 9, 1960</p>
+                    <h2 class="text-3xl font-bold text-white mt-1 mb-3">Roger Woodward: The Accidental Survivor</h2>
+                    <p class="text-gray-300">Not every person involved in stunts, 7-year-old Roger Woodward defied the odds when he was swept over the Horseshoe Falls following a boating accident. With only a lifejacket to protect him, he miraculously survived the plunge after being rescued by the crew of the Maid of the Mist boat, making him the sole known survivor of such an unprotected fall.</p>
+                </div>
+                 <img alt="Illustration of a lifejacket" class="rounded-lg object-cover w-full h-full" src="https://placehold.co/400x400/1f2937/d1d5db?text=Lifejacket"/>
+            </div>
+
+            <!-- Warning Section -->
+            <div class="text-center border-t-2 border-b-2 border-red-500/50 py-8 my-16 fade-in">
+                <h3 class="text-2xl font-bold text-red-400">A History of Tragedy</h3>
+                <p class="text-gray-300 max-w-2xl mx-auto mt-2">Despite a few survivors, numerous individuals have lost their lives attempting to conquer the Falls. These risky stunts are now prohibited, with severe penalties including fines and imprisonment. The Falls should be admired for their natural beauty, not seen as a dare to be taken on.</p>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300">
+<div class="container mx-auto px-6 py-12 lg:px-8">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Road Hana</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Home</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/photos-blog/">Photos and Blog</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Canada Side</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Things to do</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Boat Tripe</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">sight seeing</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/">Stories</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-best-view-point.html">Niagara Falls Best View Point</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-cultures-legends.html">Niagara Falls Cultures Legends</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-daredevils.html">Niagara Falls Daredevils</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-geography.html">Niagara Falls Geography</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-info.html">Niagara Falls Info</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-main-desc.html">Niagara Falls Main Desc</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-main.html">Niagara Falls Main</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-night-view-from-hotel-embassy-suite.html">Niagara Falls Night View From Hotel Embassy Suite</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls-things-to-to.html">Niagara Falls Things To To</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagara-falls.html">Niagara Falls</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagarafalls-daredevils.html">Niagarafalls Daredevils</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagarafals-best-time-to-visit.html">Niagarafals Best Time To Visit</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagra-falls-2.html">Niagra Falls 2</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagra-falls-at-night.html">Niagra Falls At Night</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagra-falls-dare-devils.html">Niagra Falls Dare Devils</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagra-falls-history.html">Niagra Falls History</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagra-fals-crossing-the-border.html">Niagra Fals Crossing The Border</a></li>
+<li><a class="hover:text-white hover:underline transition-colors duration-200" href="https://www.niagarafall.info/reference/niagrafalls-hotels.html">Niagrafalls Hotels</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-8 text-center text-sm text-gray-400">
+<p class="text-sm text-gray-400">Niagara Falls</p>
+</div>
+<div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+<p class="text-sm text-gray-400">© 2026 Niagara Falls. All rights reserved.</p>
+</div>
+</div>
+</footer>
+    </div>
+
+    <script>
+        // Simple fade-in animation on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) { return; } 
+                else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+    </script>
+
+
+</body></html>

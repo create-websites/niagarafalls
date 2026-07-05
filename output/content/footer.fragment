@@ -1,0 +1,58 @@
+<footer class="bg-gray-800 text-gray-300">
+  <div class="container mx-auto px-6 py-12 lg:px-8">
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Road Hana</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.niagarafall.info/" class="hover:text-white hover:underline transition-colors duration-200">Home</a></li>
+          <li><a href="https://www.niagarafall.info/photos-blog/" class="hover:text-white hover:underline transition-colors duration-200">Photos and Blog</a></li>
+          <li><a href="https://www.niagarafall.info/" class="hover:text-white hover:underline transition-colors duration-200">Canada Side</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Things to do</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.niagarafall.info/" class="hover:text-white hover:underline transition-colors duration-200">Boat Tripe</a></li>
+          <li><a href="https://www.niagarafall.info/" class="hover:text-white hover:underline transition-colors duration-200">sight seeing</a></li>
+          <li><a href="https://www.niagarafall.info/" class="hover:text-white hover:underline transition-colors duration-200">Stories</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Folders</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.niagarafall.info/reference/" class="hover:text-white hover:underline transition-colors duration-200">Reference</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-lg font-semibold text-white mb-4">Pages</h5>
+        <ul class="space-y-2">
+          <li><a href="https://www.niagarafall.info/crossing-the-niagara-border.html" class="hover:text-white hover:underline transition-colors duration-200">Crossing The Niagara Border</a></li>
+          <li><a href="https://www.niagarafall.info/e-to-stand-at-niagara-falls-view.html" class="hover:text-white hover:underline transition-colors duration-200">E To Stand At Niagara Falls View</a></li>
+          <li><a href="https://www.niagarafall.info/niagara-fall-geography.html" class="hover:text-white hover:underline transition-colors duration-200">Niagara Fall Geography</a></li>
+          <li><a href="https://www.niagarafall.info/niagara-falls-best-view-point-chatgpt.html" class="hover:text-white hover:underline transition-colors duration-200">Niagara Falls Best View Point Chatgpt</a></li>
+          <li><a href="https://www.niagarafall.info/niagara-falls-history-with-time.html" class="hover:text-white hover:underline transition-colors duration-200">Niagara Falls History With Time</a></li>
+          <li><a href="https://www.niagarafall.info/niagara-falls-travel-blog.html" class="hover:text-white hover:underline transition-colors duration-200">Niagara Falls Travel Blog</a></li>
+          <li><a href="https://www.niagarafall.info/select-best-niagrafalls-hotel-for-best-view.html" class="hover:text-white hover:underline transition-colors duration-200">Select Best Niagrafalls Hotel For Best View</a></li>
+          <li><a href="https://www.niagarafall.info/sitemap.html" class="hover:text-white hover:underline transition-colors duration-200">Sitemap</a></li>
+          <li><a href="https://www.niagarafall.info/stories-of-niagara-falls.html" class="hover:text-white hover:underline transition-colors duration-200">Stories Of Niagara Falls</a></li>
+          <li><a href="https://www.niagarafall.info/things-to-do-at-niagara-falls.html" class="hover:text-white hover:underline transition-colors duration-200">Things To Do At Niagara Falls</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center text-sm text-gray-400">
+      <p class="text-sm text-gray-400">Niagara Falls</p>
+    </div>
+
+    <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col items-center justify-between sm:flex-row">
+      <p class="text-sm text-gray-400">&copy; 2026 Niagara Falls. All rights reserved.</p>
+      
+    </div>
+
+  </div>
+</footer>
